@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 var chatt=angular.module('chatting',['chat','ui.bootstrap']).constant('config',{
     "pubnub":{
         "publish-key":"pub-c-70eb5318-259b-4ac5-93fb-a33c8fb30f36",

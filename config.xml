@@ -23,6 +23,9 @@ and open the template in the editor.
     <plugin name="cordova-plugin-whitelist" source="npm" spec="1.1.0" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
+    
+    
+    
     <icon src = "android/icons/mipmap-ldpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "ldpi" />
 		
