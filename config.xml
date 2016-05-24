@@ -7,7 +7,7 @@ and open the template in the editor.
 
 
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.senthurathiban.firstapp" version="1.0">
-    <name>Test App</name>
+    <name>BMessenger(senthur)</name>
     <description>Senthur's App</description>    
     <author href="www.google.com" email="senthurathiban94@gmail.com" >Senthur Athiban</author>
     <preference name="permission" value="none"/>
