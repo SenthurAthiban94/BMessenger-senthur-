@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.senthurathiban.firstapp" version="1.0">
+    <name>Test App</name>
+    <description>Senthur's App</description>    
+    <author href="www.google.com" email="senthurathiban94@gmail.com" >Senthur Athiban</author>
+    <preference name="permission" value="none"/>
+    <gap:plugin name="org.apache.cordova.splashscreen" />
+    <preference name="SplashScreen" value="screen" />
+    <gap:splash src="android/screens/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="android/screens/drawable-Idpi/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="android/screens/drawable-mdpi/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="android/screens/drawable-hdpi/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="android/screens/drawable-xhdpi/splash.png" />
+    <preference name="SplashScreenDelay" value="5000" />
+    
+    <icon src = "android/icons/mipmap-ldpi/ic_launcher.png" 
+      gap:platform = "android" gap:qualifier = "ldpi" />
+		
+   <icon src = "android/icons/mipmap-mdpi/ic_launcher.png" 
+      gap:platform = "android" gap:qualifier = "mdpi" />
+		
+   <icon src = "android/icons/mipmap-hdpi/ic_launcher.png" 
+      gap:platform = "android" gap:qualifier = "hdpi" />
+		
+   <icon src = "android/icons/mipmap-xhdpi/ic_launcher.png" 
+      gap:platform = "android" gap:qualifier = "xhdpi" />
+		
+   <icon src = "android/icons/mipmap-xxhddpi/ic_launcher.png" 
+      gap:platform = "android" gap:qualifier = "xxhdpi" />
+   
+   <icon src = "android/icons/mipmap-xxxhddpi/ic_launcher.png" 
+      gap:platform = "android" gap:qualifier = "xxxhdpi" />
+   
+</widget>
