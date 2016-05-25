@@ -18,13 +18,11 @@ and open the template in the editor.
     <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="android/screens/drawable-mdpi/splash.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="android/screens/drawable-hdpi/splash.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="android/screens/drawable-xhdpi/splash.png" />
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreenDelay" value="10000" />
     
-    <plugin name="cordova-plugin-whitelist" source="npm" spec="1.1.0" />
+<!--    <plugin name="cordova-plugin-whitelist" source="npm" spec="1.1.0" />
     <allow-navigation href="*" />
-    <allow-intent href="*" />
-    
-    
+    <allow-intent href="*" />-->
     
     <icon src = "android/icons/mipmap-ldpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "ldpi" />
