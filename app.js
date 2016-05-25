@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 var app = {
+    initialize: function(){
+      app.onDeviceReady();
+    },
     onDeviceReady: function() {
        var chatt=angular.module('chatting',['chat','ui.bootstrap']).constant('config',{
                     "pubnub":{
@@ -67,7 +70,7 @@ var app = {
 
                     $scope.focus = function () {
                         $("#msg").focus();
-                      }
+                      };
                     // Receive Messages
                     Messages.receive(function(message){
                         $scope.messages.push(message);
@@ -78,7 +81,10 @@ var app = {
                         Messages.send({ data : $scope.textbox });
                     };
                 } ] );
+            navigator.splashscreen.hide();
     }
 };
 
-app.onDeviceReady();
+app.initialize();
+
+
