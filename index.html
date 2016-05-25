@@ -4,105 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html ng-app="chatting">
+<html>
     <head>
-        <title>Broadcast Messages</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
-        <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-        <script src="js/lib/angular-chat.js"></script>
-        <script src="js/lib/ui-bootstrap-tpls-0.11.0.js"></script>
-        <script src="js/server_client/client.js"></script>
-        <link rel="stylesheet" type="text/css"  href="css/bootstrap.min.css"/>
-        <style>
-            ::-webkit-scrollbar {
-                width: 12px;
-            }
-
-            ::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-                border-radius: 10px;
-            }
-
-            ::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-            }
-            #header {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 43px;
-                padding:2%;
-                padding-left: 5px;
-                background-color:#FCAF9E;
-                font-size:20px;
-            }
-            #footer {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 44px;
-                background-color: #abcdef;
-            }
-            #content {
-                position: fixed;
-                top: 43px;
-                bottom: 44px;
-                left: 0;
-                right: 0;
-                overflow: auto;
-            }
-
-        </style>
+        <script>
+            window.location='./home.html';
+        </script>
     </head>
-    <body style="background-color:#EBFBC8;" ng-controller="chatting_controller" ng-init="focus();open()">
-        <script type="text/ng-template" id="myModalContent.html" >
-        <form ng-submit="ok()" name="username_form">
-        <div class="modal-header">
-            <h3 class="modal-title">Please Enter your name :</h3>
-        </div>
-        <div class="modal-body">
-              <input type="text" ng-model="user.name" name="username" placeholder="Username" ng-pattern ="/^[a-zA-Z\s]*$/" ng-minlength="3" ng-maxlength="10" required>
-                <p class="help-block" style="color:red;" ng-show="username_form.username.$error.pattern">Username must be letters only.</p>
-                <p class="help-block" style="color:red;" ng-if="username_form.username.$error.minlength">Must be at least 3 characters.</p>
-                <p class="help-block" style="color:red;" ng-if="username_form.username.$error.maxlength">Must be maximum of 10 characters.</p>
-        </div>
-        
-      
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="submit" ng-disabled="username_form.$invalid">OK</button>
-        </div>
-        </form>
-    </script>
-        <div class="container-fluid" style="padding:0px;">
-            <header id="header">
-                <strong><b>Broadcast Messages</b></strong>
-            </header>
-            <div id="content" scroll-bottom="messages" style="padding-top:10px;">
-                <div ng-repeat="message in messages" style="padding:0px;padding-left: 0px;padding-top: 5px;">
-                      <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0px;padding-top: 2px;padding-right: 5px;padding-left: 2px;padding-bottom: 2px;">
-                          <div class="col-md-2 col-sm-2 col-xs-2" style="word-wrap: break-word;overflow-wrap: break-word;padding:0px;padding-right: 2px;text-align: left;">{{ message.user.name }}<span class="pull-right">:</span></div><div class="col-md-10 col-sm-10 col-xs-10 " style="background-color: #bce8f1;word-wrap: break-word;overflow-wrap: break-word;white-space: pre-wrap;">{{ message.data }}</div>
-                      </div>     
-                </div>
-            </div>
-            <footer id="footer">
-                <form ng-submit="send();textbox='';focus();">
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0px;height:45px;width:100%;">
-                        <div class="col-md-11 col-m-11 col-xs-10" style="padding:0px;">
-                            <textarea style="width:100%;height:45px;padding:0px;padding-left: 5px;padding-top: 10px;font-size:18px;" ng-model="textbox" name="message" id="msg" placeholder="Enter Your Message Here" required></textarea>
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-2" style="padding:0px;">
-                            <button style="padding:0px;height:45px;width:100%;" type="submit" name="send" id="send"><img src="img/send/send.jpg" style="height: 100%;width:100%;"/></button>
-                        </div>
-                    </div>
-                </form>
-            </footer>
-        </div>
+    <body>
     </body>
 </html>

@@ -77,6 +77,23 @@ var app={
                 $scope.send = function() {
                     Messages.send({ data : $scope.textbox });
                 };
+                
+                /////////////////////////////////////////////////////////
+                
+                
+                $scope.checkonline=function(){
+                    if(navigator.onLine)
+                    {
+                        $scope.onlinestatus=true;
+                    }
+                    else
+                    {
+                        $scope.onlinestatus=false;
+                    }
+                }
+                setInterval(function () {
+                    $scope.checkonline();
+                }, 100);
             } ] );
     }
 }
