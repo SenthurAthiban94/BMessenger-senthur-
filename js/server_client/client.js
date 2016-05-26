@@ -26,8 +26,15 @@ var app={
                 }
               }
             });
+            
+            
             chatt.controller( 'chatting_controller', [ 'Messages', '$scope','$modal', '$log','$interval',
             function( Messages, $scope,$modal,$log,$interval ) {
+            
+                $interval(function(){
+                    $scope.checkonline();
+                },100);
+                
                 // Message Inbox
                 $scope.messages = [];
                 $scope.open = function (size) {
@@ -82,25 +89,18 @@ var app={
                 
                 
                 $scope.checkonline=function(){
-                    if(navigator.onLine)
-                    {
-                        $scope.onlinestatus=true;
-                    }
-                    else
-                    {
-                        $scope.onlinestatus=false;
-                    }
-                }
-//                $interval(function(){$scope.checkonline();},1000);
-                if (navigator.network.connection.type == Connection.NONE) {
-                   $scope.onlinestatus=false;
-                   $scope.$apply();
-                }
-                else {
-                   $scope.onlinestatus=true;
-                   $scope.$apply();
+                        if(navigator.onLine)
+                        {
+                            $scope.onlinestatus=true;
+                        }
+                        else
+                        {
+                            $scope.onlinestatus=false;
+                        }
                 };
+                
             } ] );
+        
     }
-}
+};
 app.onDeviceReady();
