@@ -26,8 +26,8 @@ var app={
                 }
               }
             });
-            chatt.controller( 'chatting_controller', [ 'Messages', '$scope','$modal', '$log',
-            function( Messages, $scope,$modal,$log ) {
+            chatt.controller( 'chatting_controller', [ 'Messages', '$scope','$modal', '$log','$interval',
+            function( Messages, $scope,$modal,$log,$interval ) {
                 // Message Inbox
                 $scope.messages = [];
                 $scope.open = function (size) {
@@ -91,9 +91,8 @@ var app={
                         $scope.onlinestatus=false;
                     }
                 }
-                setInterval(function () {
-                    $scope.checkonline();
-                }, 100);
+                $interval(function(){$scope.checkonline();},1000);
+                
             } ] );
     }
 }

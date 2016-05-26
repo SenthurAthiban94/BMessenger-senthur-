@@ -61,7 +61,7 @@ and open the template in the editor.
 
         </style>
     </head>
-    <body style="background-color:#EBFBC8;" ng-controller="chatting_controller" ng-init="focus();open()" onload="checkonline();">
+    <body style="background-color:#EBFBC8;" ng-controller="chatting_controller" ng-init="focus();open()">
         <script type="text/ng-template" id="myModalContent.html" >
         <form ng-submit="ok()" name="username_form">
         <div class="modal-header">
@@ -82,7 +82,7 @@ and open the template in the editor.
     </script>
         <div class="container-fluid" style="padding:0px;">
             <header id="header">
-                <strong><b>Broadcast Messages</b>  (<span ng-if="onlinestatus===true;" style="color:greenyellow;">Online</span><span ng-if="onlinestatus===false;"  style="color:red">Offline</span>)</strong>
+                <strong><b>Broadcast Messages</b></strong>
             </header>
             <div id="content" scroll-bottom="messages" >
                 <div style="padding-bottom:8px;">
@@ -98,7 +98,7 @@ and open the template in the editor.
                 <form ng-submit="send();textbox='';focus();">
                     <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0px;height:45px;width:100%;">
                         <div class="col-md-11 col-m-11 col-xs-10" style="padding:0px;">
-                            <textarea style="width:100%;height:45px;padding:0px;padding-left: 5px;padding-top: 10px;font-size:18px;" ng-model="textbox" name="message" id="msg" placeholder="Enter Your Message Here" required></textarea>
+                            <textarea ng-disabled="!onlinestatus" style="width:100%;height:45px;padding:0px;padding-left: 5px;padding-top: 10px;font-size:18px;" ng-model="textbox" name="message" id="msg" placeholder="Enter Your Message Here" required></textarea>
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-2" style="padding:0px;">
                             <button style="padding:0px;height:45px;width:100%;" type="submit" name="send" id="send"><img src="img/send/send.jpg" style="height: 100%;width:100%;"/></button>
