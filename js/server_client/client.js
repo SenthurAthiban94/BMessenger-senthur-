@@ -91,8 +91,15 @@ var app={
                         $scope.onlinestatus=false;
                     }
                 }
-                $interval(function(){$scope.checkonline();},1000);
-                
+//                $interval(function(){$scope.checkonline();},1000);
+                if (navigator.network.connection.type == Connection.NONE) {
+                   $scope.onlinestatus=false;
+                   $scope.$apply();
+                }
+                else {
+                   $scope.onlinestatus=true;
+                   $scope.$apply();
+                };
             } ] );
     }
 }
