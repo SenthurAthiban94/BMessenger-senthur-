@@ -1,0 +1,95 @@
+         ::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            ::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+            }
+            #header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 43px;
+                padding:2%;
+                padding-left: 5px;
+                background-color:#FCAF9E;
+                font-size:20px;
+            }
+            #footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 44px;
+                background-color: #abcdef;
+            }
+            .content {
+                position: fixed;
+                top: 43px;
+                bottom: 44px;
+                left: 0;
+                right: 0;
+                overflow: auto;
+                padding-left:5px;
+                padding-right: 5px;
+                padding-top:5px;
+                padding-bottom:5px;
+            }
+            .content div{
+                padding:0px;
+            }
+            
+ /*//////////////////End default style////////////////////////////////////////////*/
+ 
+/* /////////////////Chat box style/////////////////////////////////*/
+
+#messagecontent{
+     -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  padding-top: 7px;
+  padding-top: 7px;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+  font: normal "Courier New", Courier, monospace;
+  color: rgba(5,0,0,1);
+  text-align: justify;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+/*  background: rgba(242,239,239,0.7);*/
+  -webkit-box-shadow: 3px 3px 2px 0 rgba(0,0,0,0.3) ;
+  box-shadow: 0 3px 2px 0 rgba(0,0,0,0.3);
+  right:0;
+}
+ #sender_message_user{
+  background-color:#E9EEEE;   
+ }
+#sender_message_messagestyle {
+    background-color:#F8F7F7;
+    padding:5px;
+    word-wrap:break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+ #reciever_message_user
+ {
+     background-color:#97DED6;   
+ }
+ #reciever_message_messagestyle {
+    background-color:#E5FEFB;
+    padding:5px;
+    word-wrap:break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap; 
+ }
+ #sender_img_div{
+     width:40px;
+ }

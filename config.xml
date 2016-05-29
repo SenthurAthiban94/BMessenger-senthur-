@@ -1,45 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
-
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.senthurathiban.firstapp" version="1.0">
-    <name>BMessenger(senthur)</name>
-    <description>Senthur's App</description>    
-    <author href="www.google.com" email="senthurathiban94@gmail.com" >Senthur Athiban</author>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.coolappz.Broadcast_Messenger" version="0.0.1">
+    <name>Broadcast Messenger</name>
+    <description>
+        A  Apache Cordova Chatt application that allows users to communicate
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Senthur Athiban
+    </author>
+    <content src="index.html"/>
     <preference name="permission" value="none"/>
+    
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <preference name="SplashScreen" value="screen" />
-    <gap:splash src="android/screens/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="android/screens/drawable-Idpi/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="android/screens/drawable-mdpi/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="android/screens/drawable-hdpi/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="android/screens/drawable-xhdpi/splash.png" />
+    <gap:splash src="platforms/android/screens/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="platforms/android/screens/drawable-Idpi/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="platforms/android/screens/drawable-mdpi/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="platforms/android/screens/drawable-hdpi/splash.png" />
+    <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="platforms/android/screens/drawable-xhdpi/splash.png" />
     <preference name="SplashScreenDelay" value="10000" />
     
+    <plugin name="cordova-plugin-whitelist" spec="1"/>
     <plugin name="cordova-plugin-whitelist" source="npm" spec="1.1.0" />
     <allow-navigation href="*" />
-    <allow-intent href="*" />
     
-    <icon src = "android/icons/mipmap-ldpi/ic_launcher.png" 
+    <access origin="*"/>
+    <allow-intent href="http://*/*"/>
+    <allow-intent href="https://*/*"/>
+    <allow-intent href="tel:*"/>
+    <allow-intent href="sms:*"/>
+    <allow-intent href="mailto:*"/>
+    <allow-intent href="geo:*"/>
+    <platform name="android">
+        <allow-intent href="market:*"/>
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*"/>
+        <allow-intent href="itms-apps:*"/>
+    </platform>
+    <icon src = "platforms/android/icons/mipmap-ldpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "ldpi" />
 		
-   <icon src = "android/icons/mipmap-mdpi/ic_launcher.png" 
+   <icon src = "platforms/android/icons/mipmap-mdpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "mdpi" />
 		
-   <icon src = "android/icons/mipmap-hdpi/ic_launcher.png" 
+   <icon src = "platforms/android/icons/mipmap-hdpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "hdpi" />
 		
-   <icon src = "android/icons/mipmap-xhdpi/ic_launcher.png" 
+   <icon src = "platforms/android/icons/mipmap-xhdpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "xhdpi" />
 		
-   <icon src = "android/icons/mipmap-xxhddpi/ic_launcher.png" 
+   <icon src = "platforms/android/icons/mipmap-xxhddpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "xxhdpi" />
    
-   <icon src = "android/icons/mipmap-xxxhddpi/ic_launcher.png" 
+   <icon src = "platforms/android/icons/mipmap-xxxhddpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "xxxhdpi" />
-   
 </widget>
