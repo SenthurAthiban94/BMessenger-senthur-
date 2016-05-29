@@ -1,5 +1,5 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.senthurathiban.firstapp" version="1.0">
-    <name>BMessenger(senthur)</name>
+    <name>BMessenger Instant</name>
     <description>Senthur's App</description>    
     <author href="www.google.com" email="senthurathiban94@gmail.com" >Senthur Athiban</author>
     <preference name="permission" value="none"/>
