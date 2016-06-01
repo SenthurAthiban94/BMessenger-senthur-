@@ -1,44 +1,27 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.senthurathiban.firstapp" version="1.0">
-    <name>BMessenger Instant</name>
-    <description>Senthur's App</description>    
-    <author href="www.google.com" email="senthurathiban94@gmail.com" >Senthur Athiban</author>
-    <preference name="permission" value="none"/>
-    <gap:plugin name="org.apache.cordova.splashscreen" />
-    <preference name="SplashScreen" value="screen" />
-    <gap:splash src="platforms/android/screens/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="platforms/android/screens/drawable-Idpi/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="platforms/android/screens/drawable-mdpi/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="platforms/android/screens/drawable-hdpi/splash.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="platforms//screens/drawable-xhdpi/splash.png" />
-    <preference name="SplashScreenDelay" value="10000" />
-    
-    <plugin name="cordova-plugin-whitelist" source="npm" spec="1.1.0" />
-    <allow-navigation href="*" />
-    <allow-intent href="*" />
-    <access origin="*"/>
-    <allow-intent href="http://*/*"/>
-    <allow-intent href="https://*/*"/>
-    <allow-intent href="tel:*"/>
-    <allow-intent href="sms:*"/>
-    <allow-intent href="mailto:*"/>
-    <allow-intent href="geo:*"/>
-    
-    <icon src = "platforms/android/icons/mipmap-ldpi/ic_launcher.png" 
-      gap:platform = "android" gap:qualifier = "ldpi" />
-		
-   <icon src = "platforms/android/icons/mipmap-mdpi/ic_launcher.png" 
-      gap:platform = "android" gap:qualifier = "mdpi" />
-		
-   <icon src = "platforms/android/icons/mipmap-hdpi/ic_launcher.png" 
-      gap:platform = "android" gap:qualifier = "hdpi" />
-		
-   <icon src = "platforms/android/icons/mipmap-xhdpi/ic_launcher.png" 
-      gap:platform = "android" gap:qualifier = "xhdpi" />
-		
-   <icon src = "platforms/android/icons/mipmap-xxhddpi/ic_launcher.png" 
-      gap:platform = "android" gap:qualifier = "xxhdpi" />
-   
-   <icon src = "platforms/android/icons/mipmap-xxxhddpi/ic_launcher.png" 
-      gap:platform = "android" gap:qualifier = "xxxhdpi" />
-   
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.senthur.allcontacts" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Allcontacts</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+	<plugin name="cordova-plugin-contacts"  />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
 </widget>
