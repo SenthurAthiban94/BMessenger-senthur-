@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ var names=[];
 var app = {
     // Application Constructor
     initialize: function() {
@@ -33,41 +34,29 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-            app.receivedEvent('deviceready');            
-                   var options = new ContactFindOptions();
-                   options.filter="";
-                   options.filter="";
-                   options.multiple=true;
-                   var fields = ["*"];  //"*" will return all contact fields
-                   navigator.contacts.find(fields, app.onSuccess, app.onError, options);
-                
-    },
-    onSuccess : function(contacts){
-         //console.log(JSON.stringify(contacts))
-                   var li = '';
-                   $.each(contacts, function(key, value) {
-                        if(value.name){
-                            $.each(value.name, function(key, value) {
-                               if(key == 'formatted'){
-                                   name = value;
-                               }                      
-                            });
-                        }
-                        if(value.phoneNumbers){
-                            $.each(value.phoneNumbers, function(key, value) {
-                                phone = value.value;
-                            });
-                        }                    
-                        li += '<li style="text-decoration:none;">'+name+' '+phone+'</li>';
-                   }); 
-                
-                   $("#contact").html(li);
-    },
-    onError   : function(contactError){
-             alert("Some Error Occured");
+       navigator.contacts.find([navigator.contacts.fieldType.displayName],app.gotContacts,app.errorHandler);   
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    gotContacts: function(c) {
+        console.log("gotContacts, number of results "+c.length);
+         var tablebody = document.querySelector("#result");
+         
+         /* Retriving phoneNumbers */
+         for(var i=0, len=c.length; i<len; i++) {
+             if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0) {
+                tablebody.innerHTML += "<tr><td>"+(i+1)+"</td><td><div><div><b><span>Name</span>: </b><span style=\"padding-left:2px;\">"+c[i].displayName+"</span></div></div><div><div><b><span>Number</span>: </b><span style=\"padding-left:2px;\">"+c[i].phoneNumbers[0].value+"</span></div></div></td><td></td></tr>";
+             }
+         }
+        
+//         /* Retriving Email */
+//         for(var i=0, len=c.length; i<len; i++) {
+//             if(c[i].emails && c[i].emails.length > 0) {
+//                emailDiv.innerHTML += "<p>"+c[i].emails[0].value+"</p>";
+//             }
+//         }
+    },
+    errorHandler: function(e){
+        console.log("errorHandler: "+e);
     }
 };
 
