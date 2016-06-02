@@ -14,7 +14,7 @@
         <script type="text/javascript" src="js/index.js"></script>
     </head>
     <body ng-app="homeapp" ng-controller="home_controller">
-        <div  id="loaderbackground">
+        <div ng-if="loading" id="loaderbackground">
             <div id="loader">
                 <img src="css/loading/loader_default.gif" height="100%" width="100%"></img><br>
                 <span>Loading..</span>
