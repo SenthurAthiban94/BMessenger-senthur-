@@ -14,18 +14,33 @@
 		  <div class="panel-heading" id="headerhome" style="font-size:20px;"><b>Contacts</b>
               <button type="button" class="btn btn-primary pull-right"><b>Upload All</b></button>
           </div>
-          <table class="table table-hover" id="headertable">
-            <thead>
-                <tr>
-                    <th class="col-sm-1 col-xs-1 col-md-1"><strong>No</strong></th>
-                    <th class="col-sm-9 col-xs-9 col-md-9"><strong>Available Contacts</strong></th>
-                    <th class="col-sm-2 col-xs-2 col-md-2"><button type="button" class="btn btn-success"><b>Refresh</b></button></th>
-                </tr>
-            </thead>
-            <tbody id="result">
-           
-            </tbody>
-          </table>
+          <div>
+              <table class="table table-hover" style="height:40px;" id="headertable">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1 col-xs-1 col-md-1"><strong>No</strong></th>
+                        <th class="col-sm-9 col-xs-9 col-md-9"><strong>Available Contacts</strong></th>
+                        <th class="col-sm-2 col-xs-2 col-md-2"><button type="button" class="btn btn-success"><b>Refresh</b></button></th>
+                    </tr>
+                </thead>
+              </table>
+          </div>
+          <div id="tablebody">
+              <table class="table table-hover">
+                <tbody id="result">
+<!--                   <tr class="container-fluid" >
+                       <td class="col-sm-1 col-xs-1 col-md-1">123</td>
+                       <td class="col-sm-9 col-xs-9 col-md-9" style="font-size:16px;">
+                               <div><b><span>Name</span>: </b><span style="padding-left:2px;">senthurathibanathiban</span></div>
+                               <div><b><span>Number</span>: </b><span style="padding-left:2px;">987654321234567</span></div>
+                       </td>
+                       <td class="col-sm-2 col-xs-2 col-md-2" style="padding-top:10px;padding-bottom:10px;">
+                           <button type="button" class="btn btn-warning" style="height:35px;padding-top:2px;padding-bottom:2px;">Upload</button>
+                       </td>
+                   </tr> -->
+                </tbody>
+              </table>
+          </div>
 		</div>
         <script type="text/javascript" src="lib/js/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
