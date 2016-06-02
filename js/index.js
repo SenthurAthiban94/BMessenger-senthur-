@@ -1,22 +1,4 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
- var names=[];
+var names=[];
 var app = {
     // Application Constructor
     initialize: function() {
@@ -27,7 +9,19 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+        document.addEventListener('load', this.onDeviceload, false);
+        document.addEventListener('offline', this.onDeviceoffline, false);
+        document.addEventListener('online', this.onDeviceonline, false);
         document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    onDeviceload: function(){
+        
+    },
+    onDeviceoffline: function(){
+        
+    },
+    onDeviceonline: function(){
+        
     },
     // deviceready Event Handler
     //
@@ -42,9 +36,9 @@ var app = {
          var tablebody = document.querySelector("#result");
          
          /* Retriving phoneNumbers */
-         for(var i=0, len=c.length; i<len; i++) {
+         for(var i=1, len=c.length; i<=len; i++) {
              if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0) {
-                tablebody.innerHTML += "<tr><td>"+(i+1)+"</td><td><div><div><b><span>Name</span>: </b><span style=\"padding-left:2px;\">"+c[i].displayName+"</span></div></div><div><div><b><span>Number</span>: </b><span style=\"padding-left:2px;\">"+c[i].phoneNumbers[0].value+"</span></div></div></td><td></td></tr>";
+                tablebody.innerHTML += "<tr><td>"+i+"</td><td style=\"font-size:18px;\"><div><div><b><span>Name</span>: </b><span style=\"padding-left:2px;\">"+c[i].displayName+"</span></div></div><div><div><b><span>Number</span>: </b><span style=\"padding-left:2px;\">"+c[i].phoneNumbers[0].value+"</span></div></div></td><td style=\"padding-top:10px;padding-bottom:10px;\"><button type=\"button\" class=\"btn btn-warning\" style=\"height:35px;padding-top:2px;padding-bottom:2px;\">Upload</button></td></tr>";
              }
          }
         

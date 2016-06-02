@@ -6,44 +6,20 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <title>Contact Backup</title>
 		<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/index.css"></link>    
         <script type="text/javascript" src="lib/js/angular.js"></script>
     </head>
     <body>
 		<div class="container-fluid panel panel-primary" style="padding:0px;">
-		  <div class="panel-heading" style="font-size:20px;"><b>Contacts</b>
+		  <div class="panel-heading" id="headerhome" style="font-size:20px;"><b>Contacts</b>
               <button type="button" class="btn btn-primary pull-right"><b>Upload All</b></button>
           </div>
-		  <table class="table table-condensed">
-            <thead>
+          <table class="table table-hover">
+            <thead id="headertable">
                 <tr>
-                    <th>No</th>
-                    <th>Contact</th>
-                    <th><button type="button" class="btn btn-success"><b>Refresh</b></button></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td style="font-size:12px;">
-                        <div>
-                            <div>
-                              <div><b><span>Name</span> :</b><span style="padding-left:2px;">Senthur</span></div>  
-                            </div>
-                            <div>
-                                <div><b><span>Number</span> :</b><span style="padding-left:2px;">9987462515</span></div>    
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding-top:10px;padding-bottom:10px;"><button type="button" class="btn btn-warning" style="height:25px;padding-top:2px;padding-bottom:2px;">Upload</button></td>
-                </tr>
-            </tbody>
-          </table>
-          <table class="table table-condensed">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Contact</th>
-                    <th><button type="button" class="btn btn-success"><b>Refresh</b></button></th>
+                    <th class="col-sm-1 col-xs-1 col-md-1"><strong>No</strong></th>
+                    <th class="col-sm-9 col-xs-9 col-md-9"><strong>Available Contacts</strong></th>
+                    <th class="col-sm-2 col-xs-2 col-md-2"><button type="button" class="btn btn-success"><b>Refresh</b></button></th>
                 </tr>
             </thead>
             <tbody id="result">
