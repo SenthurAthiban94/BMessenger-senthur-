@@ -7,9 +7,18 @@
         <title>Contact Backup</title>
 		<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"></link>
         <link rel="stylesheet" type="text/css" href="css/index.css"></link>    
-        <script type="text/javascript" src="lib/js/angular.js"></script>
+        <script type="text/javascript" src="lib/js/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript" src="lib/js/angular.min.js"></script>
+        <script type="text/javascript" src="js/controllers/login_controller.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
     </head>
-    <body>
+    <body ng-app="homeapp" ng-controller="home_controller">
+        <div ng-if="loading" id="loaderbackground">
+            <div id="loader">
+                <img src="css/loading/loader_default.gif" height="100%" width="100%"></img>
+            </div>
+        </div>
 		<div class="container-fluid panel panel-primary" style="padding:0px;">
 		  <div class="panel-heading" id="headerhome" style="font-size:20px;"><b>Contacts</b>
               <button type="button" class="btn btn-primary pull-right"><b>Upload All</b></button>
@@ -28,7 +37,8 @@
           <div id="tablebody">
               <table class="table table-hover">
                 <tbody id="result">
-<!--                   <tr class="container-fluid" >
+                    <div class="alert alert-danger" id="noresults"> No results found !!</div>
+<!--                    <tr class="container-fluid" >
                        <td class="col-sm-1 col-xs-1 col-md-1">123</td>
                        <td class="col-sm-9 col-xs-9 col-md-9" style="font-size:16px;">
                                <div><b><span>Name</span>: </b><span style="padding-left:2px;">senthurathibanathiban</span></div>
@@ -42,8 +52,5 @@
               </table>
           </div>
 		</div>
-        <script type="text/javascript" src="lib/js/jquery-1.12.4.min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
