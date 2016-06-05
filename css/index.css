@@ -1,3 +1,26 @@
+ ::-webkit-scrollbar {
+                width: 0px;
+            }
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+html{
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;  
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 #headerhome {
             position: fixed;
             top: 0;
@@ -7,17 +30,18 @@
        }
 #headertable {
     position: fixed;
-    top: 54px;
+    top: 50px;
     left: 0;
     right: 0;
-    padding-bottom:0px;    
-    font-size:18px;
+    padding:0px;    
+    font-size:17px;
     background-color:white;
 }
 #tablebody{
-    margin-top:105px;
+    margin-top:125px;
     left: 0;
     right: 0;
+    padding:0px;
 }
 #loader {
     position:fixed;
@@ -36,4 +60,10 @@
     width:100%;
     height:100%;
     background-color: rgba(249, 249,249, 0.4);
+}
+.icon-bar{
+    background-color:white;
+}
+.navbar-toggle{
+    background-color:black;
 }

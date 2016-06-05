@@ -41,3 +41,8 @@ $('.tab a').on('click', function (e) {
   $(target).fadeIn(600);
   
 });
+$(document).ready(function(){
+  $('.tab-content #login').show();
+  $('.tab-content #signup').hide();
+});
+  

@@ -14,6 +14,8 @@ var api_service=angular.module('contact_services',[]);
             database.loginURL="http://localhost/phpservice/services/login.php";
             database.viewcontactsURL="http://localhost/phpservice/services/retrivecontacts.php";
             database.uploadcontactsURL="http://localhost/phpservice/services/uploadcontacts.php";
+            database.deletecontactsURL="http://localhost/phpservice/services/deletecontacts.php";
+            database.logoutURL="http://localhost/phpservice/services/logout.php";
             
             database.login=function($usermail,$password){
                 var datavalue={
@@ -40,8 +42,7 @@ var api_service=angular.module('contact_services',[]);
                             url : database.signupURL,
                             headers : header,
                             data : datavalue
-                        }; 
-                        alert(JSON.stringify(req));        
+                        };        
                return req;
             };
             
@@ -70,7 +71,31 @@ var api_service=angular.module('contact_services',[]);
                         };
                 return req;
             };
-            
-            
+            database.deletecontacts=function($usermail,$contactsobject){
+                var datavalue={
+                                    "usermail" : $usermail,
+  	                                "contacts":$contactsobject
+                                };
+                var req={
+                            method : "POST",
+                            url: database.deletecontactsURL,
+                            headers: header,
+                            data : datavalue
+                        };
+                return req;
+            };
+            database.logout=function($email){
+                 var datavalue={
+                                "usermail":$email
+                               };
+               var req={
+                            method : 'POST',
+                            url : database.logoutURL,
+                            headers : header,
+                            data : datavalue
+                        };
+                        alert(JSON.stringify(req));         
+               return req;
+            };
         return database;    
     });
