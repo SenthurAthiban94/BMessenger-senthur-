@@ -6,12 +6,12 @@
 var contact_App=angular.module('Contacts_sync',['contact_services']);
     contact_App.controller('Contacts_sync_controller',['$scope','$http','$window','database',function($scope,$http,$window,database){
         $scope.userdata={};
-        $scope.AlertHandler=function(){
-            
-        };
+//        $scope.AlertHandler=function(){
+//            
+//        };
         $scope.signup=function(){
            alert($scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber);
-           navigator.notification.alert("This is the User data: "+$scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber, $scope.AlertHandler, "User Details", "Exit");
+//           navigator.notification.alert("This is the User data: "+$scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber, $scope.AlertHandler, "User Details", "Exit");
            if(($scope.username) && ($scope.signup_password) && ($scope.signup_email) && ($scope.phonumber))
            {
                $scope.validate=false;
@@ -27,7 +27,7 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                 }
                 else
                 {
-                    alert(JSON.stringify($data.msg));
+                    alert(JSON.stringify($data));
                 }
                }).error(function(err){
                    alert("Error During Signup Try Again Later");

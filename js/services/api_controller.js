@@ -10,13 +10,13 @@ var api_service=angular.module('contact_services',[]);
                 };
     api_service.factory('database',function(){
         var database={};
-            database.signupURL="http://localhost/phpservice/services/signup.php";
-            database.loginURL="http://localhost/phpservice/services/login.php";
-            database.viewcontactsURL="http://localhost/phpservice/services/retrivecontacts.php";
-            database.uploadcontactsURL="http://localhost/phpservice/services/uploadcontacts.php";
-            database.deletecontactsURL="http://localhost/phpservice/services/deletecontacts.php";
-            database.logoutURL="http://localhost/phpservice/services/logout.php";
-            
+            database.signupURL="http://backupcontacts.azurewebsites.net/phpservice/services/signup.php";//http://localhost/phpservice/services/signup.php"; 
+            database.loginURL="http://backupcontacts.azurewebsites.net/phpservice/services/login.php";//http://localhost/phpservice/services/login.php";
+            database.viewcontactsURL="http://backupcontacts.azurewebsites.net/phpservice/services/retrivecontacts.php";//http://localhost/phpservice/services/retrivecontacts.php";
+            database.uploadcontactsURL="http://backupcontacts.azurewebsites.net/phpservice/services/uploadcontacts.php";//http://localhost/phpservice/services/uploadcontacts.php";
+            database.deletecontactsURL="http://backupcontacts.azurewebsites.net/phpservice/services/deletecontacts.php";//http://localhost/phpservice/services/deletecontacts.php";
+            database.logoutURL="http://backupcontacts.azurewebsites.net/phpservice/services/logout.php";//http://localhost/phpservice/services/logout.php";
+                                                        
             database.login=function($usermail,$password){
                 var datavalue={
                                 "usermail" : $usermail,
@@ -84,7 +84,7 @@ var api_service=angular.module('contact_services',[]);
                         };
                 return req;
             };
-            database.logout=function($email){
+            database.logoutuser=function($email){
                  var datavalue={
                                 "usermail":$email
                                };
@@ -93,8 +93,7 @@ var api_service=angular.module('contact_services',[]);
                             url : database.logoutURL,
                             headers : header,
                             data : datavalue
-                        };
-                        alert(JSON.stringify(req));         
+                        };         
                return req;
             };
         return database;    
