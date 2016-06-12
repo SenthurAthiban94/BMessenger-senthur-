@@ -74,18 +74,19 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         }
     };
 	$scope.gotContacts=function(c){
-         var count=0;
+         $scope.count=0;
          /* Retriving phoneNumbers */
-         for(var i=0,len=c.length; i<len;i++) { //i<5;i++){
+         for(var i=0,len=c.length; i<len;i++) {     //;i<5;i++){ 
              if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0) {
                 var localcontact={};
-                    localcontact.contactName=c[i].displayName;//"senthur";
-                    localcontact.contactNo=c[i].phoneNumbers[0].value;//"+91 9252-4898-941";
+                    $scope.count=$scope.count+1;
+                    localcontact.contactName=c[i].displayName; //"senthur";//
+                    localcontact.contactNo=c[i].phoneNumbers[0].value; //"+91 9252-4898-941";//
                     $scope.retrivedcontacts.push(localcontact);
-                    count=count+1;
              }
          }
-         if(count<1)//c.length==0)
+         $scope.$apply();
+         if($scope.count<1)//c.length==0)
          {
              $('#noresults').show();
          }
@@ -103,6 +104,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                 alert("Contacts Retrival Failed!!");
             }
             if(!$data.Contacts.length){$('#noresults').show();};
+            $scope.$apply();
             $('#loaderbackground').hide();
         }).error(function(err){
             alert(JSON.stringify(err));
@@ -163,7 +165,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         });
     };
     $scope.logout=function(){
-        $http(database.logout($scope.userdata.usermail)).success(function($data){
+        $http(database.logoutuser($scope.userdata.usermail)).success(function($data){
             alert(JSON.stringify($data));
             if($data.status==1)
             {
@@ -179,6 +181,6 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         });  
     };
     $scope.redirect = function(){
-      $window.location='./login.html';
+      $window.location='login.html';
     }
 }]);

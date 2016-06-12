@@ -60,7 +60,7 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
         };
         
         $scope.redirect = function(){
-          $window.location='./home.html';
-        }    
+          $window.location='home.html';
+        };    
     }]);
 
