@@ -15,7 +15,7 @@ var api_service=angular.module('contact_services',[]);
             database.viewcontactsURL="http://backupcontacts.azurewebsites.net/phpservice/services/retrivecontacts.php";//http://localhost/phpservice/services/retrivecontacts.php";
             database.uploadcontactsURL="http://backupcontacts.azurewebsites.net/phpservice/services/uploadcontacts.php";//http://localhost/phpservice/services/uploadcontacts.php";
             database.deletecontactsURL="http://backupcontacts.azurewebsites.net/phpservice/services/deletecontacts.php";//http://localhost/phpservice/services/deletecontacts.php";
-            database.logoutURL="http://backupcontacts.azurewebsites.net/phpservice/services/logout.php";//http://localhost/phpservice/services/logout.php";
+            database.logoutuserURL="http://backupcontacts.azurewebsites.net/phpservice/services/logout.php";//http://localhost/phpservice/services/logout.php";
                                                         
             database.login=function($usermail,$password){
                 var datavalue={
@@ -84,17 +84,18 @@ var api_service=angular.module('contact_services',[]);
                         };
                 return req;
             };
-            database.logoutuser=function($email){
-                 var datavalue={
-                                "usermail":$email
-                               };
-               var req={
+            database.logout=function($usermail){
+                var datavalue={
+                                "usermail" : $usermail
+                                };
+                var req={
                             method : 'POST',
-                            url : database.logoutURL,
+                            url : database.logoutuserURL,
                             headers : header,
                             data : datavalue
-                        };         
-               return req;
+                        };
+                return req;
             };
+            
         return database;    
     });

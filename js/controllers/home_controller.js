@@ -93,7 +93,8 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
          $('#loaderbackground').hide();  
 	};
 	$scope.errorHandler=function(error){
-		console.log("errorHandler: "+e);
+		console.log("errorHandler: "+error);
+        $('#loaderbackground').hide();
 	};
     $scope.getuploadedcontacts=function(){
         $http(database.viewcontacts($scope.userdata.usermail)).success(function($data){
@@ -103,7 +104,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             else{
                 alert("Contacts Retrival Failed!!");
             }
-            if(!$data.Contacts.length){$('#noresults').show();};
+            if(!$data.Contacts.length){$('#noresults').show();}
             $scope.$apply();
             $('#loaderbackground').hide();
         }).error(function(err){
@@ -115,7 +116,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     
     $scope.uploadallcontactstodatabase=function(){
         $http(database.uploadcontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
-            alert($data.msg);
+            alert("Contacts Uploaded Successfully");
             $('#loaderbackground').hide(); 
         }).error(function(err){
             alert(JSON.stringify(err));
@@ -124,7 +125,6 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     };
     $scope.uploadcontacttodatabase=function($contact){
         var uploadthiscontact=[];
-        alert(JSON.stringify($contact));
         uploadthiscontact.push($contact);
         $http(database.uploadcontacts($scope.userdata.usermail,uploadthiscontact)).success(function($data){
             alert($data.msg);
@@ -136,13 +136,11 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     };
     $scope.deleteallcontactsfromdatabase=function(){
         $http(database.deletecontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
-            alert(JSON.stringify($data));
             if($data.status==1)
             {
                 alert("All Contact Deleted Successfully"); 
             }
             $scope.refreshcontacts();
-            $('#loaderbackground').hide();
         }).error(function(err){
             alert(JSON.stringify(err));
             $('#loaderbackground').hide();
@@ -152,35 +150,34 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         var deletethiscontact=[];
         deletethiscontact.push($contact);
         $http(database.deletecontacts($scope.userdata.usermail,deletethiscontact)).success(function($data){
-            alert(JSON.stringify($data));
             if($data.status==1)
             {
-                alert("All Contact Deleted Successfully");
+                alert("Contact Deleted Successfully");
             }
             $scope.refreshcontacts();
-            $('#loaderbackground').hide();
         }).error(function(err){
             alert(JSON.stringify(err));
             $('#loaderbackground').hide();
         });
     };
-    $scope.logout=function(){
-        $http(database.logoutuser($scope.userdata.usermail)).success(function($data){
-            alert(JSON.stringify($data));
-            if($data.status==1)
-            {
-                alert("Successfully LoggedOut!!");
-                $scope.userdata={};
-                sessionStorage.userDataObJect='';
-                $scope.redirect();
-            }
-            $('#loaderbackground').hide();
-        }).error(function(err){
-            alert(JSON.stringify(err));
-            $('#loaderbackground').hide();
-        });  
+    $scope.logoutsession=function($email){
+        $http(database.logout($email)).success(function($data){
+                    if($data.status==1)
+                    {
+                        alert("Logged out Successfully");
+                        $scope.userdata={};
+                        sessionStorage.userDataObJect='';
+                        $scope.redirect();
+                    }
+                    else
+                    {
+                        alert(JSON.stringify($data));
+                    }
+               }).error(function(err){
+                   alert("Error During Login Try Again Later");
+               });
     };
     $scope.redirect = function(){
       $window.location='login.html';
-    }
+    };
 }]);

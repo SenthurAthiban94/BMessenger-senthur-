@@ -1,6 +1,6 @@
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src * 'unsafe-inline'; media-src *">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,height=device-height, target-densitydpi=medium-dpi,width=device-width">
@@ -28,7 +28,7 @@
             <ul class="nav nav-pills nav-stacked" id="menulist">
                 <li class="{{selecteditem1}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="displaynames=devicecontactsnames;item=1;selectmenuitem(item);refreshcontacts();"><b>Home</b></a></li>
                 <li class="{{selecteditem2}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="displaynames=uploadedcontactsnames;item=2;selectmenuitem(item);refreshcontacts();"><b>Uploaded Contacts</b></a></li>
-                <li class="{{selecteditem3}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="item=3;selectmenuitem(item);logout();"><b>Logout</b></a></li>
+                <li class="{{selecteditem3}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="item=3;selectmenuitem(item);logoutsession(userdata.usermail);"><b>Logout</b></a></li>
             </ul>
         </nav>
         <div class="navbar navbar-inverse navbar-fixed-top">

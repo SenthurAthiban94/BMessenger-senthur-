@@ -10,7 +10,7 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
 //            
 //        };
         $scope.signup=function(){
-           alert($scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber);
+//           alert($scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber);
 //           navigator.notification.alert("This is the User data: "+$scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber, $scope.AlertHandler, "User Details", "Exit");
            if(($scope.username) && ($scope.signup_password) && ($scope.signup_email) && ($scope.phonumber))
            {
