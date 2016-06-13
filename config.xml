@@ -40,7 +40,7 @@
     <splash src="platform/android/splash/res/drawable-mdpi/screen.png" platform="android" qualifier="mdpi" />
     <splash src="platform/android/splash/res/drawable-hdpi/screen.png" platform="android" qualifier="hdpi" />
     <splash src="platform/android/splash/res/drawable-xxhdpi/screen.png"  platform="android" qualifier="xhdpi" />
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreenDelay" value="10000" />
     <icon src="platform/android/icon/background/icon_background.png" />
     <icon src = "platform/android/icon/background/mipmap-ldpi/ic_launcher.png" 
       platform = "android" qualifier = "ldpi" />
