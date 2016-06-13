@@ -32,7 +32,7 @@
     <plugin name="cordova-plugin-dialogs" spec="~1.2.1" />
     <engine name="windows" spec="~4.3.2" />
 	<plugin name="phonegap-plugin-mobile-accessibility" spec="https://github.com/phonegap/phonegap-mobile-accessibility.git" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:plugin name="cordova-plugin-splashscreen" />
     <preference name="SplashScreen" value="screen" />
     <gap:splash src="platform/android/splash/res/screen.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="platform/android/splash/res/drawable-Idpi/screen.png" />
