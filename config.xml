@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.senthur.backupcontact" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Backup Contacts</name>
+    <name>Contact 24/7</name>
     <description>
         An application allowing users to access their contacts on various Android Devices
     </description>
@@ -32,7 +32,7 @@
     <plugin name="cordova-plugin-dialogs" spec="~1.2.1" />
     <engine name="windows" spec="~4.3.2" />
 	<plugin name="phonegap-plugin-mobile-accessibility" spec="https://github.com/phonegap/phonegap-mobile-accessibility.git" />
-    <gap:plugin name="cordova-plugin-splashscreen" />
+    <plugin name="cordova-plugin-splashscreen" spec="~3.2.2" />
     <preference name="SplashScreen" value="screen" />
     <gap:splash src="platform/android/splash/res/screen.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="platform/android/splash/res/drawable-Idpi/screen.png" />
