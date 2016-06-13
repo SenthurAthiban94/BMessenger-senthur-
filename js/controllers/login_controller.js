@@ -31,6 +31,9 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                 }
                }).error(function(err){
                    alert("Error During Signup Try Again Later");
+                   if(err==""){
+                       alert("Check your Internet Connection!!");
+                   }
                });
            }
            else{
@@ -55,6 +58,9 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                     else{$scope.validate=true;}
                }).error(function(err){
                    alert("Error During Login Try Again Later");
+                   if(err==""){
+                       alert("Check your Internet Connection!!");
+                   }
                });       
             }else{$scope.validateemail=true;}
         };

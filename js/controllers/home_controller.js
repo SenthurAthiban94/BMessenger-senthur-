@@ -24,23 +24,22 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         "select" : "Delete",
         "style" : "btn-danger"
     };
+    $('#loaderbackground').hide();
 	$scope.refreshcontacts=function(){
         $('#noresults').hide();
-        $scope.retrivedcontacts=[];
         $('#loaderbackground').show();
+        $scope.retrivedcontacts=[];
         if($scope.displaynames==$scope.devicecontactsnames)
         {
-//            $scope.gotContacts();
     		navigator.contacts.find([navigator.contacts.fieldType.displayName],$scope.gotContacts,$scope.errorHandler);  
         }
         else if($scope.displaynames==$scope.uploadedcontactsnames)
         {
-            $scope.getuploadedcontacts(); 
+            $scope.getuploadedcontacts();
         }
         else
-        {
-            $('#loaderbackground').hide();
-        }
+        {}
+        $('#loaderbackground').Hide();
 	};
     
     $scope.actiontobeperformedonallcontacts=function(){
@@ -54,9 +53,8 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.deleteallcontactsfromdatabase();
         }
         else
-        {
-            $('#loaderbackground').hide();
-        }
+        {}
+        $('#loaderbackground').hide();
     };
     $scope.actiontobeperformedonthiscontact=function($contact){
         $('#loaderbackground').show();
@@ -69,9 +67,8 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.deletecontactfromdatabase($contact);
         }
         else
-        {
-            $('#loaderbackground').hide();
-        }
+        {}
+        $('#loaderbackground').hide();
     };
 	$scope.gotContacts=function(c){
          $scope.count=0;
@@ -85,12 +82,10 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     $scope.retrivedcontacts.push(localcontact);
              }
          }
-         $scope.$apply();
          if($scope.count<1)//c.length==0)
          {
              $('#noresults').show();
-         }
-         $('#loaderbackground').hide();  
+         }  
 	};
 	$scope.errorHandler=function(error){
 		console.log("errorHandler: "+error);
@@ -105,22 +100,20 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                 alert("Contacts Retrival Failed!!");
             }
             if(!$data.Contacts.length){$('#noresults').show();}
-            $scope.$apply();
-            $('#loaderbackground').hide();
         }).error(function(err){
             alert(JSON.stringify(err));
-            $('#loaderbackground').hide();
+            if(err==""){
+               alert("Check your Internet Connection!!");
+            }
         });
     };
     
     
     $scope.uploadallcontactstodatabase=function(){
         $http(database.uploadcontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
-            alert("Contacts Uploaded Successfully");
-            $('#loaderbackground').hide(); 
+            alert("Contacts Uploaded Successfully"); 
         }).error(function(err){
             alert(JSON.stringify(err));
-            $('#loaderbackground').hide();
         });  
     };
     $scope.uploadcontacttodatabase=function($contact){
@@ -128,10 +121,11 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         uploadthiscontact.push($contact);
         $http(database.uploadcontacts($scope.userdata.usermail,uploadthiscontact)).success(function($data){
             alert($data.msg);
-            $('#loaderbackground').hide();
         }).error(function(err){
             alert(JSON.stringify(err));
-            $('#loaderbackground').hide();
+            if(err==""){
+                 alert("Check your Internet Connection!!");
+            }
         });  
     };
     $scope.deleteallcontactsfromdatabase=function(){
@@ -143,7 +137,9 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.refreshcontacts();
         }).error(function(err){
             alert(JSON.stringify(err));
-            $('#loaderbackground').hide();
+            if(err==""){
+                 alert("Check your Internet Connection!!");
+            }
         });
     };
     $scope.deletecontactfromdatabase=function($contact){
@@ -157,16 +153,20 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.refreshcontacts();
         }).error(function(err){
             alert(JSON.stringify(err));
-            $('#loaderbackground').hide();
+            if(err==""){
+                 alert("Check your Internet Connection!!");
+            }
         });
     };
     $scope.logoutsession=function($email){
+        $('#loaderbackground').show();
         $http(database.logout($email)).success(function($data){
                     if($data.status==1)
                     {
                         alert("Logged out Successfully");
                         $scope.userdata={};
                         sessionStorage.userDataObJect='';
+                        $('#loaderbackground').hide();
                         $scope.redirect();
                     }
                     else
@@ -175,7 +175,11 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     }
                }).error(function(err){
                    alert("Error During Login Try Again Later");
+                   if(err==""){
+                         alert("Check your Internet Connection!!");
+                    }
                });
+       $('#loaderbackground').hide();        
     };
     $scope.redirect = function(){
       $window.location='login.html';
