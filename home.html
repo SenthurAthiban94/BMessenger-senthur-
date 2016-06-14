@@ -17,7 +17,7 @@
         <script type="text/javascript" src="js/index.js"></script>
     </head>
     <body ng-controller="home_controller" ng-init="displaynames=devicecontactsnames;refreshcontacts();" >
-         <div id="loaderbackground">
+         <div id="loaderbackground" ng-show="loadingimage">
             <div id="loader">
                 <img src="css/loading/loader_default.gif" height="100%" width="100%"></img><br>
                 <span style="background-color:white;opacity:1;"><b>Loading...</b></span>
@@ -26,9 +26,9 @@
         <nav id="Menus" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation" style="width:70%;background-color:#1B2A4B;" ng-init="selecteditem1='active';">
           <img src="img/logo.png" height="50px" width="100%;"></img>
             <ul class="nav nav-pills nav-stacked" id="menulist">
-                <li class="{{selecteditem1}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="displaynames=devicecontactsnames;item=1;selectmenuitem(item);refreshcontacts();"><b>Home</b></a></li>
-                <li class="{{selecteditem2}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="displaynames=uploadedcontactsnames;item=2;selectmenuitem(item);refreshcontacts();"><b>Uploaded Contacts</b></a></li>
-                <li class="{{selecteditem3}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="item=3;selectmenuitem(item);logoutsession(userdata.usermail);"><b>Logout</b></a></li>
+                <li class="{{selecteditem1}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="displaynames=devicecontactsnames;item=1;selectmenuitem(item);menuonecount=menuonecount+1;checkfirstselected(menuonecount);"><b>Home</b></a></li>
+                <li class="{{selecteditem2}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="displaynames=uploadedcontactsnames;item=2;selectmenuitem(item);menutwocount=menutwocount+1;checksecondselected(menutwocount);"><b>Uploaded Contacts</b></a></li>
+                <li class="{{selecteditem3}}"><a href="" data-toggle="offcanvas" data-target="#Menus" ng-click="item=3;selectmenuitem(item);logoutsession();" ng-dblclick="return false;"><b>Logout</b></a></li>
             </ul>
         </nav>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -57,7 +57,7 @@
                                 <strong>Contacts</strong>
                             </th>
                             <th class="col-sm-1 col-xs-1 col-md-1" style="padding-top:4px;padding-bottom:4px;padding-right:5px;">
-                                <button type="button" ng-click="refreshcontacts()" class="btn btn-sm btn-success" style="height:35px;padding-left:7px;padding-right:7px;">
+                                <button type="button" ng-click="refreshcontacts();searchtext='';" class="btn btn-sm btn-success" style="height:35px;padding-left:7px;padding-right:7px;" >
                                     <b><span ng-bind="displaynames.refresh"></span></b>
                                 </button>
                             </th>
@@ -66,7 +66,7 @@
                             <th style="padding:0px;width:0px;">
                             </th>
                             <th class="col-sm-12 col-xs-12 col-md-12" style="padding:2px;">
-                                <input type="text" style="width:100%;font-size:14px;" ng-model="searchtext" placeholder="Search for Contacts here..."></input>
+                                <input type="text" style="width:100%;font-size:16px;font-family:Lucida Sans;padding:2px;" ng-model="searchtext" ng-disabled="loadingimage" placeholder="Search for Contacts here..."></input>
                             </th>
                             <th style="width:0px;padding:0px;">
                             </th>
@@ -78,7 +78,7 @@
             <table class="table table-hover">
                 <tbody id="result">
                      <tr ng-repeat="contact in retrivedcontacts | filter:searchtext">
-                        <td class="col-sm-1 col-xs-1 col-md-1" ng-bind="$scope.count=$scope.count+1;"></td>
+                        <td class="col-sm-1 col-xs-1 col-md-1" ng-bind="$index+1"></td>
                         <td class="col-sm-10 col-xs-10 col-md-10" style="font-size:16px;padding-left:8px;padding-right:5px;">
                             <div>
                                 <div><b><span>Name</span>: </b><span style="padding-left:2px;" ng-bind="contact.contactName"></span></div>

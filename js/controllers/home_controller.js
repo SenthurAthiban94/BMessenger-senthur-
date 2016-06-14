@@ -1,6 +1,8 @@
 var contactshome=angular.module('Contactshome',['contact_services']);
 contactshome.controller('home_controller',['$scope','$http','$window','database',function($scope,$http,$window,database){
     $scope.userdata=JSON.parse(sessionStorage.userDataObJect);
+    $scope.menuonecount=0;$scope.menutwocount=0;
+    $scope.loadingimage=true;
     if(!$scope.userdata){
         $scope.redirect();
     }
@@ -24,40 +26,50 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         "select" : "Delete",
         "style" : "btn-danger"
     };
-    $('#loaderbackground').hide();
+    $scope.checkfirstselected=function($selectedmenu){
+        if($selectedmenu<2)
+        {
+            $scope.loadingimage=true;
+            $scope.menutwocount=0;
+            $scope.refreshcontacts();   
+        }
+    };
+    $scope.checksecondselected=function($selectedmenu){
+        if($selectedmenu<2)
+        {
+            $scope.loadingimage=true;
+            $scope.menuonecount=0;
+            $scope.refreshcontacts();   
+        }
+    };
 	$scope.refreshcontacts=function(){
-        $('#noresults').hide();
-        $('#loaderbackground').show();
+        $('#noresults').hide();  
         $scope.retrivedcontacts=[];
         if($scope.displaynames==$scope.devicecontactsnames)
         {
+            $scope.loadingimage=true;
     		navigator.contacts.find([navigator.contacts.fieldType.displayName],$scope.gotContacts,$scope.errorHandler);  
         }
-        else if($scope.displaynames==$scope.uploadedcontactsnames)
+        if($scope.displaynames==$scope.uploadedcontactsnames)
         {
+            $scope.loadingimage=true;
             $scope.getuploadedcontacts();
         }
-        else
-        {}
-        $('#loaderbackground').Hide();
 	};
     
     $scope.actiontobeperformedonallcontacts=function(){
-        $('#loaderbackground').show();
+        $scope.loadingimage=true;
         if($scope.displaynames==$scope.devicecontactsnames)
         {
               $scope.uploadallcontactstodatabase();
         }
-        else if($scope.displaynames==$scope.uploadedcontactsnames)
+        if($scope.displaynames==$scope.uploadedcontactsnames)
         {
             $scope.deleteallcontactsfromdatabase();
         }
-        else
-        {}
-        $('#loaderbackground').hide();
     };
     $scope.actiontobeperformedonthiscontact=function($contact){
-        $('#loaderbackground').show();
+        $scope.loadingimage=true;
         if($scope.displaynames==$scope.devicecontactsnames)
         {
               $scope.uploadcontacttodatabase($contact);
@@ -68,118 +80,135 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         }
         else
         {}
-        $('#loaderbackground').hide();
     };
 	$scope.gotContacts=function(c){
-         $scope.count=0;
+        $scope.loadingimage=true;
          /* Retriving phoneNumbers */
          for(var i=0,len=c.length; i<len;i++) {     //;i<5;i++){ 
              if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0) {
                 var localcontact={};
-                    $scope.count=$scope.count+1;
                     localcontact.contactName=c[i].displayName; //"senthur";//
                     localcontact.contactNo=c[i].phoneNumbers[0].value; //"+91 9252-4898-941";//
                     $scope.retrivedcontacts.push(localcontact);
              }
          }
-         if($scope.count<1)//c.length==0)
+         if(c.length < 1)//c.length==0)
          {
-             $('#noresults').show();
-         }  
+             $('#noresults').show();  
+             $scope.loadingimage=false;
+         }
+         else{
+             $('#noresults').hide(); 
+             $scope.loadingimage=false; 
+         }
 	};
 	$scope.errorHandler=function(error){
 		console.log("errorHandler: "+error);
-        $('#loaderbackground').hide();
+        $scope.loadingimage=false;
 	};
     $scope.getuploadedcontacts=function(){
+        $scope.loadingimage=true;
         $http(database.viewcontacts($scope.userdata.usermail)).success(function($data){
             if(($data.Contacts) && ($data.status==1)){
                 $scope.retrivedcontacts=$data.Contacts;
+                if(!$scope.retrivedcontacts.length){$('#noresults').show();}
+                $scope.loadingimage=false;
             }
             else{
                 alert("Contacts Retrival Failed!!");
+                $scope.loadingimage=false;
             }
-            if(!$data.Contacts.length){$('#noresults').show();}
         }).error(function(err){
-            alert(JSON.stringify(err));
             if(err==""){
-               alert("Check your Internet Connection!!");
-            }
+                 alert("Check your Internet Connection!!");
+            }else{alert(JSON.stringify(err));}
+            $scope.loadingimage=false;
         });
     };
     
     
     $scope.uploadallcontactstodatabase=function(){
+        $scope.loadingimage=true;
         $http(database.uploadcontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
-            alert("Contacts Uploaded Successfully"); 
+            alert("Contacts Uploaded Successfully");
+            $scope.loadingimage=false; 
         }).error(function(err){
-            alert(JSON.stringify(err));
+            $scope.loadingimage=false;
+            if(err==""){
+                 alert("Check your Internet Connection!!");
+            }else{alert(JSON.stringify(err));}
         });  
     };
     $scope.uploadcontacttodatabase=function($contact){
+        $scope.loadingimage=true;
         var uploadthiscontact=[];
         uploadthiscontact.push($contact);
         $http(database.uploadcontacts($scope.userdata.usermail,uploadthiscontact)).success(function($data){
             alert($data.msg);
+            $scope.loadingimage=false;
         }).error(function(err){
-            alert(JSON.stringify(err));
+            $scope.loadingimage=false;
             if(err==""){
                  alert("Check your Internet Connection!!");
-            }
+            }else{alert(JSON.stringify(err));}
         });  
     };
     $scope.deleteallcontactsfromdatabase=function(){
+        $scope.loadingimage=true;
         $http(database.deletecontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
             if($data.status==1)
             {
                 alert("All Contact Deleted Successfully"); 
             }
+            $scope.loadingimage=false;
             $scope.refreshcontacts();
         }).error(function(err){
-            alert(JSON.stringify(err));
             if(err==""){
                  alert("Check your Internet Connection!!");
-            }
+            }else{alert(JSON.stringify(err));}
+             $scope.loadingimage=false;
         });
     };
     $scope.deletecontactfromdatabase=function($contact){
+        $scope.loadingimage=true;
         var deletethiscontact=[];
         deletethiscontact.push($contact);
         $http(database.deletecontacts($scope.userdata.usermail,deletethiscontact)).success(function($data){
             if($data.status==1)
             {
+                $scope.refreshcontacts();
                 alert("Contact Deleted Successfully");
             }
-            $scope.refreshcontacts();
+            $scope.loadingimage=false;
         }).error(function(err){
-            alert(JSON.stringify(err));
+            $scope.loadingimage=false;
             if(err==""){
                  alert("Check your Internet Connection!!");
-            }
+            }else{alert(JSON.stringify(err));}
         });
     };
-    $scope.logoutsession=function($email){
-        $('#loaderbackground').show();
-        $http(database.logout($email)).success(function($data){
+    $scope.logoutsession=function(){
+        $scope.loadingimage=true;
+        $http(database.logout($scope.userdata.usermail)).success(function($data){
                     if($data.status==1)
                     {
                         alert("Logged out Successfully");
                         $scope.userdata={};
                         sessionStorage.userDataObJect='';
-                        $('#loaderbackground').hide();
                         $scope.redirect();
+                        $scope.loadingimage=false;
                     }
                     else
                     {
                         alert(JSON.stringify($data));
+                        $scope.loadingimage=true;
                     }
                }).error(function(err){
-                   alert("Error During Login Try Again Later");
                    if(err==""){
                          alert("Check your Internet Connection!!");
-                    }
-               });
-       $('#loaderbackground').hide();        
+                    }else{alert(JSON.stringify(err));}
+                    $scope.loadingimage=false;
+               });   
     };
     $scope.redirect = function(){
       $window.location='login.html';
