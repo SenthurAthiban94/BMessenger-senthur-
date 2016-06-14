@@ -43,16 +43,15 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         }
     };
 	$scope.refreshcontacts=function(){
-        $('#noresults').hide();  
+        $('#noresults').hide();
+        $scope.loadingimage=true;  
         $scope.retrivedcontacts=[];
         if($scope.displaynames==$scope.devicecontactsnames)
         {
-            $scope.loadingimage=true;
     		navigator.contacts.find([navigator.contacts.fieldType.displayName],$scope.gotContacts,$scope.errorHandler);  
         }
         if($scope.displaynames==$scope.uploadedcontactsnames)
         {
-            $scope.loadingimage=true;
             $scope.getuploadedcontacts();
         }
 	};
