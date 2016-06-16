@@ -31,6 +31,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         {
             $scope.loadingimage=true;
             $scope.menutwocount=0;
+            $scope.searchtext="";
             $scope.refreshcontacts();   
         }
     };
@@ -39,12 +40,14 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         {
             $scope.loadingimage=true;
             $scope.menuonecount=0;
+            $scope.searchtext="";
             $scope.refreshcontacts();   
         }
     };
 	$scope.refreshcontacts=function(){
         $('#noresults').hide();
-        $scope.loadingimage=true;  
+        $scope.loadingimage=true;
+        $scope.Checkuploadedcontacts();  
         $scope.retrivedcontacts=[];
         if($scope.displaynames==$scope.devicecontactsnames)
         {
@@ -67,7 +70,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.deleteallcontactsfromdatabase();
         }
     };
-    $scope.actiontobeperformedonthiscontact=function($contact){
+    $scope.actiontobeperformedonthiscontact=function($contact,$index){
         $scope.loadingimage=true;
         if($scope.displaynames==$scope.devicecontactsnames)
         {
@@ -75,7 +78,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         }
         else if($scope.displaynames==$scope.uploadedcontactsnames)
         {
-            $scope.deletecontactfromdatabase($contact);
+            $scope.deletecontactfromdatabase($contact,$index);
         }
         else
         {}
@@ -100,6 +103,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
              $('#noresults').hide(); 
              $scope.loadingimage=false; 
          }
+         $scope.$apply();
 	};
 	$scope.errorHandler=function(error){
 		console.log("errorHandler: "+error);
@@ -152,6 +156,28 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             }else{alert(JSON.stringify(err));}
         });  
     };
+    $scope.Checkuploadedcontacts=function(){
+        $http(database.viewcontacts($scope.userdata.usermail)).success(function($data){
+            if(($data.Contacts) && ($data.status==1)){
+                $scope.checkuploadedcontacts=$data.Contacts;
+            }
+            else{
+                alert("Contacts Retrival Failed!!");
+            }
+        }).error(function(err){
+            if(err==""){
+                 alert("Check your Internet Connection!!");
+            }else{alert(JSON.stringify(err));}
+        });
+    };
+    $scope.doesExist = function($contact) {
+        if($scope.displaynames==$scope.devicecontactsnames){
+            return $scope.checkuploadedcontacts.indexOf($contact) !== -1;   
+        }
+        else{
+                return false;
+        }
+    };
     $scope.deleteallcontactsfromdatabase=function(){
         $scope.loadingimage=true;
         $http(database.deletecontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
@@ -168,15 +194,15 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
              $scope.loadingimage=false;
         });
     };
-    $scope.deletecontactfromdatabase=function($contact){
+    $scope.deletecontactfromdatabase=function($contact,$index){
         $scope.loadingimage=true;
         var deletethiscontact=[];
         deletethiscontact.push($contact);
         $http(database.deletecontacts($scope.userdata.usermail,deletethiscontact)).success(function($data){
             if($data.status==1)
             {
-                $scope.refreshcontacts();
                 alert("Contact Deleted Successfully");
+                $scope.remove($scope.retrivedcontacts,$index);
             }
             $scope.loadingimage=false;
         }).error(function(err){
@@ -186,6 +212,9 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             }else{alert(JSON.stringify(err));}
         });
     };
+    $scope.remove = function(array, index){
+        array.splice(index, 1);
+    };   
     $scope.logoutsession=function(){
         $scope.loadingimage=true;
         $http(database.logout($scope.userdata.usermail)).success(function($data){
