@@ -29,8 +29,8 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     $scope.checkfirstselected=function($selectedmenu){
         if($selectedmenu<2)
         {
-            $('#noresults').hide();
             $scope.loadingimage=true;
+            $scope.$apply();
             $scope.menutwocount=0;
             $scope.searchtext="";
             $scope.refreshcontacts();   
@@ -39,15 +39,14 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     $scope.checksecondselected=function($selectedmenu){
         if($selectedmenu<2)
         {
-            $('#noresults').hide();
             $scope.loadingimage=true;
+            $scope.$apply();
             $scope.menuonecount=0;
             $scope.searchtext="";
             $scope.refreshcontacts();   
         }
     };
 	$scope.refreshcontacts=function(){
-        $('#noresults').hide();
         $scope.loadingimage=true;
         $scope.Checkuploadedcontacts();  
         $scope.retrivedcontacts=[];
@@ -87,6 +86,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     };
 	$scope.gotContacts=function(c){
         $scope.loadingimage=true;
+        $scope.displaymessage(c.length);
          /* Retriving phoneNumbers */
          for(var i=0,len=c.length; i<len;i++) {     //;i<5;i++){ 
              if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0) {
@@ -96,16 +96,15 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     $scope.retrivedcontacts.push(localcontact);
              }
          }
-         if(c.length < 1)//c.length==0)
-         {
-             $('#noresults').show();
-         }
-         else{
-             $('#noresults').hide();  
-         }
          $scope.loadingimage=false;
          $scope.$apply();
 	};
+    $scope.displaymessage=function($valuelength){
+        if($valuelength > 0)//c.length==0)
+         {
+             $('#noresults').hide();
+         }
+    };
 	$scope.errorHandler=function(error){
 		console.log("errorHandler: "+error);
         $scope.loadingimage=false;
