@@ -29,6 +29,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     $scope.checkfirstselected=function($selectedmenu){
         if($selectedmenu<2)
         {
+            $('#noresults').hide();
             $scope.loadingimage=true;
             $scope.menutwocount=0;
             $scope.searchtext="";
@@ -38,6 +39,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     $scope.checksecondselected=function($selectedmenu){
         if($selectedmenu<2)
         {
+            $('#noresults').hide();
             $scope.loadingimage=true;
             $scope.menuonecount=0;
             $scope.searchtext="";
@@ -94,16 +96,19 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     $scope.retrivedcontacts.push(localcontact);
              }
          }
-         if(c.length < 1)//c.length==0)
+         $scope.displaymessage(c.length);
+         $scope.loadingimage=false;
+         $scope.$apply();
+	};
+    $scope.displaymessage=function($valuelength){
+        if($valuelength < 1)//c.length==0)
          {
              $('#noresults').show();
          }
          else{
              $('#noresults').hide();  
          }
-         $scope.loadingimage=false;
-         $scope.$apply();
-	};
+    };
 	$scope.errorHandler=function(error){
 		console.log("errorHandler: "+error);
         $scope.loadingimage=false;
