@@ -2,10 +2,10 @@
 <widget id="com.senthur.backupcontact" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Contact 24/7</name>
     <description>
-        An application allowing users to access their contacts on various Android Devices
+        Application To Retrive Your Contacts Anywhere When Your Device Is Poweredoff Or Missed 
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+        Young Developer Team
     </author>  
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />

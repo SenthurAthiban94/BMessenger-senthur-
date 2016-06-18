@@ -96,13 +96,12 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
          }
          if(c.length < 1)//c.length==0)
          {
-             $('#noresults').show();  
-             $scope.loadingimage=false;
+             $('#noresults').show();
          }
          else{
-             $('#noresults').hide(); 
-             $scope.loadingimage=false; 
+             $('#noresults').hide();  
          }
+         $scope.loadingimage=false;
          $scope.$apply();
 	};
 	$scope.errorHandler=function(error){

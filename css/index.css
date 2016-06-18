@@ -63,7 +63,7 @@ body{
 
 
 .headerhome {
-            position: absolute;
+            position: fixed;
             margin:0 auto;
             width:100%;
        }
@@ -77,15 +77,15 @@ body{
     background-color:white;
 }
 #tablebody{
-    margin-top:125px;
+    margin-top:106px;
     left: 0;
     right: 0;
     padding:0px;
 }
 #loader {
     position:fixed;
-    top: 45%;
-    left: 39%;
+    top: 25%;
+    left: 38%;
     width:80px;
     height:80px;
     opacity: 0.7;
