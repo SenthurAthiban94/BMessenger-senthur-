@@ -96,19 +96,16 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     $scope.retrivedcontacts.push(localcontact);
              }
          }
-         $scope.displaymessage(c.length);
-         $scope.loadingimage=false;
-         $scope.$apply();
-	};
-    $scope.displaymessage=function($valuelength){
-        if($valuelength < 1)//c.length==0)
+         if(c.length < 1)//c.length==0)
          {
              $('#noresults').show();
          }
          else{
              $('#noresults').hide();  
          }
-    };
+         $scope.loadingimage=false;
+         $scope.$apply();
+	};
 	$scope.errorHandler=function(error){
 		console.log("errorHandler: "+error);
         $scope.loadingimage=false;
