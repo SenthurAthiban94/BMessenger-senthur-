@@ -27,6 +27,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         "style" : "btn-danger"
     };
     $scope.checkfirstselected=function($selectedmenu){
+        $scope.loadingimage=true;
         if($selectedmenu<2)
         {
             $scope.menutwocount=0;
@@ -35,6 +36,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         }
     };
     $scope.checksecondselected=function($selectedmenu){
+        $scope.loadingimage=true;
         if($selectedmenu<2)
         {
             $scope.menuonecount=0;
@@ -44,7 +46,6 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     };
 	$scope.refreshcontacts=function(){
         $('#noresults').hide();
-        $scope.loadingimage=true;
         $scope.Checkuploadedcontacts();  
         $scope.retrivedcontacts=[];
         if($scope.displaynames==$scope.devicecontactsnames)
@@ -82,7 +83,6 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         {}
     };
 	$scope.gotContacts=function(c){
-        $scope.loadingimage=true;
         $scope.displaymessage(c.length);
          /* Retriving phoneNumbers */
          for(var i=0,len=c.length; i<len;i++) {     //;i<5;i++){ 
@@ -111,7 +111,6 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         $scope.loadingimage=false;
 	};
     $scope.getuploadedcontacts=function(){
-        $scope.loadingimage=true;
         $http(database.viewcontacts($scope.userdata.usermail)).success(function($data){
             if(($data.Contacts) && ($data.status==1)){
                 $scope.retrivedcontacts=$data.Contacts;
