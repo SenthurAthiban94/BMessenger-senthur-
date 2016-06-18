@@ -29,8 +29,6 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     $scope.checkfirstselected=function($selectedmenu){
         if($selectedmenu<2)
         {
-            $scope.loadingimage=true;
-            $scope.$apply();
             $scope.menutwocount=0;
             $scope.searchtext="";
             $scope.refreshcontacts();   
@@ -39,14 +37,13 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     $scope.checksecondselected=function($selectedmenu){
         if($selectedmenu<2)
         {
-            $scope.loadingimage=true;
-            $scope.$apply();
             $scope.menuonecount=0;
             $scope.searchtext="";
             $scope.refreshcontacts();   
         }
     };
 	$scope.refreshcontacts=function(){
+        $('#noresults').hide();
         $scope.loadingimage=true;
         $scope.Checkuploadedcontacts();  
         $scope.retrivedcontacts=[];
@@ -95,6 +92,10 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     localcontact.contactNo=c[i].phoneNumbers[0].value; //"+91 9252-4898-941";//
                     $scope.retrivedcontacts.push(localcontact);
              }
+         }
+         if(c.length==0)
+         {
+                $('#noresults').show();
          }
          $scope.loadingimage=false;
          $scope.$apply();
