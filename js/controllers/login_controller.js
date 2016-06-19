@@ -13,6 +13,7 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
 //            
 //        };
         $scope.signup=function(){
+            $scope.signuploading=true;
 //           alert($scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber);
 //           navigator.notification.alert("This is the User data: "+$scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber, $scope.AlertHandler, "User Details", "Exit");
            if(($scope.username) && ($scope.signup_password) && ($scope.signup_email) && ($scope.phonumber))
@@ -27,47 +28,58 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                     sessionStorage.userDataObJect=JSON.stringify($scope.userdata);
                     alert($data.msg);
                     $scope.submittedsignup=false;
+                    $scope.signuploading=false;
                     $scope.redirect();
                 }
                 else
                 {
                     alert(JSON.stringify($data));
+                    $scope.signuploading=false;
                     $scope.submittedsignup=false;
                 }
                }).error(function(err){
-                   $scope.submittedsignup=false;
-                   alert("Error During Signup Try Again Later");
                    if(err==""){
                        alert("Check your Internet Connection!!");
+                       $scope.signuploading=false;
+                   }
+                   else{
+                       $scope.signuploading=false;
+                       $scope.submittedsignup=false;
+                       alert("Error During Signup Try Again Later");
                    }
                });
            }
            else{
                $scope.validate=true;$scope.submittedsignup=false;
+               $scope.signuploading=false;
            } 
         };
         $scope.login=function(){
+            $scope.loginloading=true;
             if($scope.login_mail){
                 $scope.validateemail=false;
                 $http(database.login($scope.login_mail,$scope.login_password)).success(function($data){
                     if($data.status==1)
                     {
                         $scope.validate=false;
-                        alert("Logged In Successfully");
                         $scope.userdata.username=$data.username;
                         $scope.userdata.usermail=$data.usermail;
                         $scope.userdata.userid=$data.userid;
                         $scope.userdata.contacts=$data.Contacts;
                         sessionStorage.userDataObJect=JSON.stringify($scope.userdata);
                         $scope.submitted=false;
+                        $scope.loginloading=false;
                         $scope.redirect();
                     }
-                    else{$scope.validate=true;$scope.submitted=false;}
+                    else{$scope.validate=true;$scope.submitted=false;$scope.loginloading=false;}
                }).error(function(err){
-                   alert("Error During Login Try Again Later");
-                   $scope.submitted=false;
                    if(err==""){
                        alert("Check your Internet Connection!!");
+                       $scope.loginloading=false;
+                   }else{
+                       alert("Error During Login Try Again Later");
+                       $scope.submitted=false;
+                       $scope.loginloading=false;
                    }
                });       
             }else{$scope.validateemail=true;$scope.submitted=false;}
