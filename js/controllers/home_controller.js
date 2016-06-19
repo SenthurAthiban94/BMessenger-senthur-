@@ -224,8 +224,11 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             {
                 alert("Contact Deleted Successfully");
                 $scope.remove($scope.retrivedcontacts,$index);
+                $scope.loadingimage=false;
             }
-            $scope.loadingimage=false;
+            if($scope.searchtext){
+                $scope.refreshcontacts();   
+            }
         }).error(function(err){
             $scope.loadingimage=false;
             if(err==""){
