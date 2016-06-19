@@ -14,6 +14,7 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                     evt.preventDefault();
                 }
             }
+        };
         document.addEventListener("backbutton", $scope.goBack, false);
         $scope.userdata={};
 //        $scope.AlertHandler=function(){
