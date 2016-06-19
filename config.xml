@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.senthur.backupcontact" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Contact 24/7</name>
+    <name>Contact 24x7</name>
     <description>
         Application To Retrive Your Contacts Anywhere When Your Device Is Poweredoff Or Missed 
     </description>
