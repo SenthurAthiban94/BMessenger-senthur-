@@ -33,7 +33,7 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                 }
                 else
                 {
-                    alert(JSON.stringify($data));
+                    alert($data.msg);
                     $scope.signuploading=false;
                     $scope.submittedsignup=false;
                 }

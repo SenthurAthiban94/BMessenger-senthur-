@@ -1,11 +1,14 @@
 var contactshome=angular.module('Contactshome',['contact_services']);
 contactshome.controller('home_controller',['$scope','$http','$window','database',function($scope,$http,$window,database){
+    $scope.redirect = function(){
+      $window.location='login.html';
+    };
+    if(!sessionStorage.userDataObJect){
+        $scope.redirect();
+    }
     $scope.userdata=JSON.parse(sessionStorage.userDataObJect);
     $scope.menuonecount=0;$scope.menutwocount=0;
     $scope.loadingimage=true;
-    if(!$scope.userdata){
-        $scope.redirect();
-    }
     $scope.selectmenuitem=function(itemselected){
         if(itemselected==1){$scope.selecteditem1='active';$scope.selecteditem2='';$scope.selecteditem3='';}
         else if(itemselected==2){$scope.selecteditem1='';$scope.selecteditem2='active';$scope.selecteditem3='';}
@@ -244,7 +247,6 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         $http(database.logout($scope.userdata.usermail)).success(function($data){
                     if($data.status==1)
                     {
-                        alert("Logged out Successfully");
                         $scope.userdata={};
                         sessionStorage.userDataObJect='';
                         $scope.redirect();
@@ -261,8 +263,5 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     }else{alert(JSON.stringify(err));}
                     $scope.loadingimage=false;
                });   
-    };
-    $scope.redirect = function(){
-      $window.location='login.html';
     };
 }]);
