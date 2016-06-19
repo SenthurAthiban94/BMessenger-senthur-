@@ -14,29 +14,6 @@
     <script type="text/javascript" src="./lib/js/angular.min.js"></script>
     <script type="text/javascript" src="./js/controllers/login_controller.js"></script>
     <script type="text/javascript" src="./js/services/api_controller.js"></script>
-    <script>
-        var login = {
-                // Application Constructor
-                initialize: function() {
-                    this.bindEvents();
-                },
-                bindEvents: function() {
-                    document.addEventListener('deviceready', this.onDeviceReady, false);
-                    document.addEventListener("backbutton", this.onBackKeyDown, false);
-                },
-                onDeviceReady: function() {
-                   if(window.MobileAccessibility){
-                        window.MobileAccessibility.usePreferredTextZoom(false);
-                   }
-                   angular.bootstrap(document,['Contacts_sync']);   
-                },
-                onBackKeyDown: function(e) {
-                      e.preventDefault();
-                }
-            };
-            
-            login.initialize();
-    </script>
   </head>
   <body ng-controller="Contacts_sync_controller">
     <div class="form" id="main" style="padding-bottom:20px;">

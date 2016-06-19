@@ -8,6 +8,13 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
         $scope.redirect = function(){
           $window.location='home.html';
         };
+        $scope.goBack = function (evt) {
+            if (evt != null) {
+                if (evt.preventDefault) {
+                    evt.preventDefault();
+                }
+            }
+        document.addEventListener("backbutton", $scope.goBack, false);
         $scope.userdata={};
 //        $scope.AlertHandler=function(){
 //            
