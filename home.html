@@ -67,8 +67,8 @@
                     </button>
                     <div style="padding-top:10px;padding-bottom:10px;padding-right:5px;">
                         <span style="color:white;font-size:20px;padding-left:5px;" ng-bind="displaynames.title"></span>
-                        <button type="button" class="btn btn-primary btn-sm pull-right" ng-click="actiontobeperformedonallcontacts();" ng-disabled="!retrivedcontacts.length">
-                            <span style="color:white" ng-bind="displaynames.selectall"></span>
+                        <button type="button" ng-bind="displaynames.selectall" class="btn btn-primary btn-sm pull-right" ng-click="actiontobeperformedonallcontacts();" ng-disabled="checkbackgroundopertion(operationperforming,retrivedcontacts.length)"><!--!retrivedcontacts.length-->
+<!--                            <span style="color:white" ng-bind="displaynames.selectall"></span>-->
                         </button>
                     </div>
                 </div>
@@ -102,15 +102,15 @@
                 </table>
             </div>
             <div id="tablebody" ng-init="name='Name :';number='Number :';">
-                <div canvas="container" style="padding:0px;padding-bottom:105px;">
+                <div id="loaderbackground">
+                    <div id="loader">
+                        <img src="css/loading/loader.gif" height="100%" width="100%"></img><br>
+                        <span style="background-color:white;opacity:1;"><b>Loading...</b></span>
+                    </div>
+                </div>
+                <div canvas="container" style="padding:0px;padding-bottom:105px;" ng-hide="loadingimage">
                     <table class="table table-hover">
-                        <div id="loaderbackground" ng-show="loadingimage">
-                            <div id="loader">
-                                <img src="css/loading/loader.gif" height="100%" width="100%"></img><br>
-                                <span style="background-color:white;opacity:1;"><b>Loading...</b></span>
-                            </div>
-                        </div>
-                        <tbody id="result">
+                        <tbody id="result" >
                             <div class="alert alert-danger" ng-show="(!(retrivedcontacts | filter:searchtext).length) && (!loadingimage)" id="noresults">No results found !!</div>
                              <tr ng-repeat="contact in retrivedcontacts | filter:searchtext">
                                 <td class="col-sm-1 col-xs-1 col-md-1" ng-bind="$index+1"></td>

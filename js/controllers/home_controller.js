@@ -27,27 +27,42 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         "style" : "btn-danger"
     };
     $scope.checkfirstselected=function($selectedmenu){
-        $scope.loadingimage=true;
         if($selectedmenu<2)
         {
+            $scope.loadingimage=true;
             $scope.menutwocount=0;
             $scope.searchtext="";
             $scope.refreshcontacts();   
         }
+        else{
+            $scope.loadingimage=false;   
+        }
     };
     $scope.checksecondselected=function($selectedmenu){
-        $scope.loadingimage=true;
         if($selectedmenu<2)
         {
             $scope.menuonecount=0;
             $scope.searchtext="";
             $scope.refreshcontacts();   
         }
+        else{
+            $scope.loadingimage=false;
+        }
+    };
+    $scope.checkbackgroundopertion=function($status,$listlength){
+        if($status || !$listlength){
+            return true;
+        }  
+        else{
+            return false;   
+        }
     };
 	$scope.refreshcontacts=function(){
         $('#noresults').hide();
+        $scope.loadingimage=true;
         $scope.Checkuploadedcontacts();  
         $scope.retrivedcontacts=[];
+        $scope.$apply();
         if($scope.displaynames==$scope.devicecontactsnames)
         {
     		navigator.contacts.find([navigator.contacts.fieldType.displayName],$scope.gotContacts,$scope.errorHandler);  
@@ -60,12 +75,15 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     
     $scope.actiontobeperformedonallcontacts=function(){
         $scope.loadingimage=true;
+        $scope.operationperforming=true;
         if($scope.displaynames==$scope.devicecontactsnames)
         {
+              alert("Performing Background Upload...");
               $scope.uploadallcontactstodatabase();
         }
         if($scope.displaynames==$scope.uploadedcontactsnames)
         {
+            alert("Performing Background Delete...");
             $scope.deleteallcontactsfromdatabase();
         }
     };
@@ -131,15 +149,17 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     
     
     $scope.uploadallcontactstodatabase=function(){
-        $scope.loadingimage=true;
+        $scope.loadingimage=false;
         $http(database.uploadcontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
             alert("Contacts Uploaded Successfully");
             $scope.loadingimage=false; 
+            $scope.operationperforming=false;
         }).error(function(err){
             $scope.loadingimage=false;
             if(err==""){
                  alert("Check your Internet Connection!!");
             }else{alert(JSON.stringify(err));}
+            $scope.operationperforming=false;
         });  
     };
     $scope.uploadcontacttodatabase=function($contact){
@@ -179,19 +199,20 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         }
     };
     $scope.deleteallcontactsfromdatabase=function(){
-        $scope.loadingimage=true;
+        $scope.loadingimage=false;
         $http(database.deletecontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
             if($data.status==1)
             {
                 alert("All Contact Deleted Successfully"); 
             }
+            $scope.operationperforming=false;
             $scope.loadingimage=false;
             $scope.refreshcontacts();
         }).error(function(err){
             if(err==""){
                  alert("Check your Internet Connection!!");
             }else{alert(JSON.stringify(err));}
-             $scope.loadingimage=false;
+            $scope.operationperforming=false;
         });
     };
     $scope.deletecontactfromdatabase=function($contact,$index){
