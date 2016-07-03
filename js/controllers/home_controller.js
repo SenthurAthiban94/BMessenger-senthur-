@@ -1,18 +1,28 @@
 var contactshome=angular.module('Contactshome',['contact_services']);
+    contactshome.filter('removeSpaces', [function() {
+        return function(string) {
+            if (!angular.isString(string)) {
+                return string;
+            }
+            return string.replace(/[\s]/g, '');
+        };
+    }]);
+    
 contactshome.controller('home_controller',['$scope','$http','$window','database',function($scope,$http,$window,database){
+    $scope.loadingimage=true;
     $scope.redirect = function(){
-      $window.location='login.html';
+        $window.location='login.html';
     };
     if(!sessionStorage.userDataObJect){
         $scope.redirect();
     }
     $scope.userdata=JSON.parse(sessionStorage.userDataObJect);
     $scope.menuonecount=0;$scope.menutwocount=0;
-    $scope.loadingimage=true;
     $scope.selectmenuitem=function(itemselected){
-        if(itemselected==1){$scope.selecteditem1='active';$scope.selecteditem2='';$scope.selecteditem3='';}
-        else if(itemselected==2){$scope.selecteditem1='';$scope.selecteditem2='active';$scope.selecteditem3='';}
-        else{$scope.selecteditem1='';$scope.selecteditem2='';$scope.selecteditem3='active';}  
+        if(itemselected==1){$scope.selecteditem1='active';$scope.selecteditem2='';$scope.selecteditem3='';$scope.selecteditem4='';}
+        else if(itemselected==2){$scope.selecteditem1='';$scope.selecteditem2='active';$scope.selecteditem3='';$scope.selecteditem4='';}
+        else if(itemselected==3){$scope.selecteditem1='';$scope.selecteditem2='';$scope.selecteditem3='active';$scope.selecteditem4='';}
+        else{$scope.selecteditem1='';$scope.selecteditem2='';$scope.selecteditem3='';$scope.selecteditem4='active';}  
     };
     $scope.displaynames={}; 
     $scope.devicecontactsnames={
@@ -28,6 +38,13 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         "selectall" : "Delete All",
         "select" : "Delete",
         "style" : "btn-danger"
+    };
+    $scope.Googlecontactsnames={
+        "title" :"Google Contacts"
+//        "refresh" :"Refresh",
+//        "selectall" : "Delete All",
+//        "select" : "Delete",
+//        "style" : "btn-danger"
     };
     $scope.checkfirstselected=function($selectedmenu){
         if($selectedmenu<2)
@@ -52,14 +69,82 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.loadingimage=false;
         }
     };
+    $scope.checkthirdselected=function(){
+        $scope.menuonecount=0;
+        $scope.menutwocount=0;
+        if(!$scope.googlecontacts)
+        {
+            $scope.searchtext="";
+            $scope.refreshcontacts();
+        }
+        else{
+            $scope.retrivedcontacts=$scope.gotgooglecontacts.Contacts;
+        }
+    };
     $scope.checkbackgroundopertion=function($status,$listlength){
         if($status || !$listlength){
             return true;
         }  
         else{
-            return false;   
+            return false;
         }
     };
+    /////////////////////////////////////////////  GOOGLE API  /////////////////////////////////////////////////////        
+        $scope.auth=function($email) {
+    	    var config = {
+    	      'client_id': '321489143617-9jn1c4a3b26q6mt4319gnv3a0t0ckafp.apps.googleusercontent.com',
+    	      'scope': 'https://www.google.com/m8/feeds'
+    	    };
+    	    gapi.auth.authorize(config, function() {
+    	      $scope.fetch($email,gapi.auth.getToken()); 
+    	    });
+    	  };
+    	  $scope.fetch=function($email,token) {
+    	    $.ajax({
+    		    url: "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + token.access_token + "&max-results=50000&alt=json",
+    		    dataType: "jsonp",
+    		    success:function(data) {
+                          // display all your data in console
+                          $scope.googlecontacts=true;
+                          //$scope.google_contacts_entire_details=data;
+                          $scope.gotgooglecontacts={};
+                          $scope.gotgooglecontacts.Contacts=[];
+                          $scope.gotgooglecontacts.title=data.feed.title.$t;
+                          $scope.gotgooglecontactsobject=data.feed.entry;
+                          var numberofcontacts=$scope.gotgooglecontactsobject.length;
+                          for(var i=0; i<numberofcontacts;i++) {  
+                             if($scope.gotgooglecontactsobject[i].title && $scope.gotgooglecontactsobject[i].gd$phoneNumber) {
+                                     var noofnumbers=$scope.gotgooglecontactsobject[i].gd$phoneNumber.length;
+                                     for(var j=0;j<noofnumbers;j++)
+                                     {
+                                         var localcontact={};
+                                             localcontact.contactName=$scope.gotgooglecontactsobject[i].title.$t; //"senthur";//
+                                             if($scope.gotgooglecontactsobject[i].gd$phoneNumber[j].uri)
+                                             {
+                                                 $scope.gotgooglecontactsobject[i].gd$phoneNumber[j].uri=$scope.gotgooglecontactsobject[i].gd$phoneNumber[j].uri.substr(4);
+                                                 localcontact.contactNo=$scope.gotgooglecontactsobject[i].gd$phoneNumber[j].uri; //"+91 9252-4898-941";//
+                                             }
+                                             else{
+                                                 localcontact.contactNo=$scope.gotgooglecontactsobject[i].gd$phoneNumber[j].$t;
+                                             }
+                                             $scope.gotgooglecontacts.Contacts.push(localcontact);
+                                     }
+                              }
+                          }
+                          $scope.retrivedcontacts=$scope.gotgooglecontacts.Contacts;
+                          $scope.uploadallcontactstodatabase();
+                          $scope.loadingimage=false;
+                          $scope.$apply();
+//    		              console.log(JSON.stringify(data));
+                          console.log(JSON.stringify($scope.gotgooglecontacts));
+    		    },
+    			error : function(e){
+                    $scope.googlecontacts=false;
+    				console.log("Authentication Failed"+JSON.stringify(e));
+    			}
+    		});
+    	};
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$scope.refreshcontacts=function(){
         $('#noresults').hide();
         $scope.loadingimage=true;
@@ -74,6 +159,9 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         {
             $scope.getuploadedcontacts();
         }
+        if($scope.displaynames==$scope.Googlecontactsnames){
+          $scope.auth($scope.userdata.usermail);
+        };
 	};
     
     $scope.actiontobeperformedonallcontacts=function(){
@@ -90,7 +178,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.deleteallcontactsfromdatabase();
         }
     };
-    $scope.actiontobeperformedonthiscontact=function($contact,$index){
+    $scope.actiontobeperformedonthiscontact=function($contact){
         $scope.loadingimage=true;
         if($scope.displaynames==$scope.devicecontactsnames)
         {
@@ -98,7 +186,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
         }
         else if($scope.displaynames==$scope.uploadedcontactsnames)
         {
-            $scope.deletecontactfromdatabase($contact,$index);
+            $scope.deletecontactfromdatabase($contact);
         }
         else
         {}
@@ -114,10 +202,10 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     $scope.retrivedcontacts.push(localcontact);
              }
          }
-         if(c.length==0)
-         {
-                $('#noresults').show();
-         }
+//         if(c.length==0)
+//         {
+//                $('#noresults').show();
+//         }
          $scope.loadingimage=false;
          $scope.$apply();
 	};
@@ -154,7 +242,9 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     $scope.uploadallcontactstodatabase=function(){
         $scope.loadingimage=false;
         $http(database.uploadcontacts($scope.userdata.usermail,$scope.retrivedcontacts)).success(function($data){
-            alert("Contacts Uploaded Successfully");
+            if(!$scope.googlecontacts){
+               alert("Contacts Uploaded Successfully");   
+            }
             $scope.loadingimage=false; 
             $scope.operationperforming=false;
         }).error(function(err){
@@ -218,7 +308,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             $scope.operationperforming=false;
         });
     };
-    $scope.deletecontactfromdatabase=function($contact,$index){
+    $scope.deletecontactfromdatabase=function($contact){
         $scope.loadingimage=true;
         var deletethiscontact=[];
         deletethiscontact.push($contact);
@@ -226,7 +316,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             if($data.status==1)
             {
                 alert("Contact Deleted Successfully");
-                $scope.remove($scope.retrivedcontacts,$index);
+                $scope.remove($contact);
                 $scope.loadingimage=false;
             }
             if($scope.searchtext){
@@ -239,9 +329,9 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
             }else{alert(JSON.stringify(err));}
         });
     };
-    $scope.remove = function(array, index){
-        array.splice(index, 1);
-    };   
+    $scope.remove = function(contact){
+        $scope.retrivedcontacts.splice($scope.retrivedcontacts.indexOf(contact),1);
+    };
     $scope.logoutsession=function(){
         $scope.loadingimage=true;
         $http(database.logout($scope.userdata.usermail)).success(function($data){
@@ -249,6 +339,7 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
                     {
                         $scope.userdata={};
                         sessionStorage.userDataObJect='';
+                        $scope.googlelogout=true;
                         $scope.redirect();
                         $scope.loadingimage=false;
                     }

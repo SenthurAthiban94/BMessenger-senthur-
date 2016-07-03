@@ -30,16 +30,16 @@
             <h1>Sign Up</h1>
             <div class="alert alert-danger" ng-if="validate && ((!username)||(!signup_password)||(!phonumber)||(!signup_email))">
               <strong>
-                <p ng-if="!username">Invalid UserName!!<br>(Only Characters)</p>
+                <p ng-if="!username">Invalid Name!!<br>(Only Characters)</p>
                 <p ng-if="!signup_password">Password is Invalid</p>
                 <p ng-if="!phonumber">Phone Number is Invalid</p>
                 <p ng-if="!signup_email">Email is Invalid</p>
               </strong>
             </div>
-            <form ng-submit="signup();submittedsignup=true;">
+            <form ng-submit="signup();">
               <div class="field-wrap">
                 <label>
-                  User Name<span class="req">*</span>
+                  Name<span class="req">*</span>
                 </label>
                 <input type="text" ng-pattern="/^[a-zA-Z ]*$/" ng-model="username" name="username" required autocomplete="off"/>
               </div>
@@ -61,7 +61,7 @@
                 </label>
                 <input type="email" ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' name="email" ng-model="signup_email" required autocomplete="off"/>
               </div>
-              <button type="submit" ng-disabled="submittedsignup" ng-dblclick="return false;" class="button button-block"/>
+              <button type="submit" ng-disabled="submittedsignup" ng-dblclick="false;" class="button button-block"/>
               <span style="padding:0px;"><img ng-show="signuploading" src="css/loading/login_loader.gif" height="35px" width="35px"><span style="padding-top:5px;">Get Started</span></img></span></button>
               </button>
               </form>
@@ -78,7 +78,7 @@
               <p if="validate">Email ID or Password is Incorrect</p>
             </strong>
           </div>
-          <form ng-submit="login();submitted=true;">
+          <form ng-submit="login();">
               <div class="field-wrap">
               <label>
                 Email Address<span class="req">*</span>
@@ -92,13 +92,13 @@
                 <input type="password"  ng-model="login_password" required autocomplete="off" ng-change="validate=false;validateemail=false;"/>
               </div>
               <p class="forgot"><a href="#">Forgot Password?</a></p>
-              <button type="submit" ng-disabled="submitted" ng-dblclick="return false;" class="button button-block"/>
+              <button type="submit" ng-disabled="submitted" class="button button-block"/>
               <span style="padding:0px;"><img ng-show="loginloading" src="css/loading/login_loader.gif" height="35px" width="35px"><span style="padding-top:5px;">Log In</span></img></span></button>
               </form>
             </div>
           </div><!-- tab-content -->
         </div>
-        <script src='./lib/js/jquery-1.12.4.min.js'></script>
+        <script src='./lib/js/jquery.min.js'></script>
         <script src="./js/form.js"></script>
   </body>
 </html>

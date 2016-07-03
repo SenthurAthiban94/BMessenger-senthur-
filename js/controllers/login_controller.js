@@ -17,13 +17,11 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
         };
         document.addEventListener("backbutton", $scope.goBack, false);
         $scope.userdata={};
-//        $scope.AlertHandler=function(){
-//            
-//        };
+ ////////////////////////////////////////////   SIGN UP  ////////////////////////////////////////////////////       
+        
         $scope.signup=function(){
             $scope.signuploading=true;
-//           alert($scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber);
-//           navigator.notification.alert("This is the User data: "+$scope.username+","+$scope.signup_password+","+$scope.signup_email+","+$scope.phonumber, $scope.AlertHandler, "User Details", "Exit");
+            $scope.submittedsignup=true;
            if(($scope.username) && ($scope.signup_password) && ($scope.signup_email) && ($scope.phonumber))
            {
                $scope.validate=false;
@@ -48,22 +46,23 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                }).error(function(err){
                    if(err==""){
                        alert("Check your Internet Connection!!");
-                       $scope.signuploading=false;
                    }
                    else{
-                       $scope.signuploading=false;
-                       $scope.submittedsignup=false;
                        alert("Error During Signup Try Again Later");
                    }
+                   $scope.submittedsignup=false;
+                   $scope.signuploading=false;
                });
            }
            else{
-               $scope.validate=true;$scope.submittedsignup=false;
+               $scope.validate=true;
+               $scope.submittedsignup=false;
                $scope.signuploading=false;
            } 
         };
         $scope.login=function(){
             $scope.loginloading=true;
+            $scope.submitted=true;
             if($scope.login_mail){
                 $scope.validateemail=false;
                 $http(database.login($scope.login_mail,$scope.login_password)).success(function($data){
@@ -79,22 +78,21 @@ var contact_App=angular.module('Contacts_sync',['contact_services']);
                         $scope.loginloading=false;
                         $scope.redirect();
                     }
-                    else{$scope.validate=true;$scope.submitted=false;$scope.loginloading=false;}
+                    else{$scope.validate=true;$scope.submitted=false;$scope.loginloading=false;$scope.submitted=false;}
                }).error(function(err){
                    if(err==""){
                        alert("Check your Internet Connection!!");
-                       $scope.loginloading=false;
                    }else{
                        alert("Error During Login Try Again Later");
-                       $scope.submitted=false;
-                       $scope.loginloading=false;
                    }
+                   $scope.loginloading=false;
+                   $scope.submitted=false;
                });       
-            }else{$scope.validateemail=true;$scope.submitted=false;}
+            }else{$scope.validateemail=true;$scope.loginloading=false;$scope.submitted=false;}
         };
         
         if(sessionStorage.userDataObJect){
             $scope.redirect();
-        }    
+        }	    
     }]);
 
