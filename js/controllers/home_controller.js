@@ -92,8 +92,8 @@ contactshome.controller('home_controller',['$scope','$http','$window','database'
     /////////////////////////////////////////////  GOOGLE API  /////////////////////////////////////////////////////        
         $scope.auth=function($email) {
     	    var config = {
-              'client_id':  '321489143617-4t5duhhnu6q6oeijdnlqseqgef7726ob.apps.googleusercontent.com',         //Android
-    	      //'client_id': '321489143617-9jn1c4a3b26q6mt4319gnv3a0t0ckafp.apps.googleusercontent.com',        // Web app
+//              'client_id':  '321489143617-4t5duhhnu6q6oeijdnlqseqgef7726ob.apps.googleusercontent.com',         //Android
+    	      'client_id': '321489143617-9jn1c4a3b26q6mt4319gnv3a0t0ckafp.apps.googleusercontent.com',        // Web app
     	      'scope': 'https://www.google.com/m8/feeds'
     	    };
     	    gapi.auth.authorize(config, function() {
