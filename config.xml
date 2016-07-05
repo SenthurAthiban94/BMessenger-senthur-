@@ -42,7 +42,7 @@
     <splash src="platform/android/splash/res/drawable-xxhdpi/screen.png"  platform="android" qualifier="xhdpi" />-->
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="fullscreen" value="false" />
-    <icon src="platform/android/icon/background/icon_background.png" />
+    <icon src="platform/android/icon/icon_background.png" />
     <icon src = "platform/android/icon/background/mipmap-ldpi/ic_launcher.png" 
       platform = "android" qualifier = "ldpi" />
 		
