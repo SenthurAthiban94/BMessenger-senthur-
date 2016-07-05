@@ -8,7 +8,7 @@
         Young Developer Team
     </author>  
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
     <allow-navigation href="*" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -26,11 +26,12 @@
     </platform>
     <engine name="android" spec="~5.1.1" />
     <engine name="browser" spec="~4.1.0" />
+	<engine name="windows" spec="~4.3.2" />
     <plugin name="cordova-plugin-device" spec="~1.1.2" />
     <plugin name="cordova-plugin-contacts" spec="~2.1.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.3" />
     <plugin name="cordova-plugin-dialogs" spec="~1.2.1" />
-    <engine name="windows" spec="~4.3.2" />
+	<!--<plugin name="phonegap-plugin-mobile-accessibility" spec="~1.0.4-dev" />-->
 	<plugin name="phonegap-plugin-mobile-accessibility" spec="https://github.com/phonegap/phonegap-mobile-accessibility.git" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.2.2" />
     
@@ -42,7 +43,7 @@
     <splash src="platform/android/splash/res/drawable-xxhdpi/screen.png"  platform="android" qualifier="xhdpi" />-->
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="fullscreen" value="false" />
-    <icon src="platform/android/icon/background/icon_background.png" />
+    <icon src="platform/android/icon/icon_background.png" />
     <icon src = "platform/android/icon/background/mipmap-ldpi/ic_launcher.png" 
       platform = "android" qualifier = "ldpi" />
 		
