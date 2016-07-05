@@ -19,21 +19,6 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
-		<icon src="platform/android/icon/icon_background.png" />
-		<icon src = "platform/android/icon/background/mipmap-ldpi/ic_launcher.png" 
-		  platform = "android" qualifier = "ldpi" />
-			
-	   <icon src = "platform/android/icon/background/mipmap-mdpi/ic_launcher.png" 
-		  platform = "android" qualifier = "mdpi" />
-			
-	   <icon src = "platform/android/icon/background/mipmap-hdpi/ic_launcher.png" 
-		  platform = "android" qualifier = "hdpi" />
-			
-	   <icon src = "platform/android/icon/background/mipmap-xhdpi/ic_launcher.png" 
-		  platform = "android" qualifier = "xhdpi" />
-			
-	   <icon src = "platform/android/icon/background/mipmap-xxhddpi/ic_launcher.png" 
-		  platform = "android" qualifier = "xxhdpi" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -58,6 +43,22 @@
     <splash src="platform/android/splash/res/drawable-xxhdpi/screen.png"  platform="android" qualifier="xhdpi" />-->
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="fullscreen" value="false" />
+    <icon src="platform/android/icon/icon_background.png" />
+    <icon src = "platform/android/icon/background/mipmap-ldpi/ic_launcher.png" 
+      platform = "android" qualifier = "ldpi" />
+		
+   <icon src = "platform/android/icon/background/mipmap-mdpi/ic_launcher.png" 
+      platform = "android" qualifier = "mdpi" />
+		
+   <icon src = "platform/android/icon/background/mipmap-hdpi/ic_launcher.png" 
+      platform = "android" qualifier = "hdpi" />
+		
+   <icon src = "platform/android/icon/background/mipmap-xhdpi/ic_launcher.png" 
+      platform = "android" qualifier = "xhdpi" />
+		
+   <icon src = "platform/android/icon/background/mipmap-xxhddpi/ic_launcher.png" 
+      platform = "android" qualifier = "xxhdpi" />
+    
     <!--<splash src="fr-xhdpi.png" platform="android" qualifier="fr-xhdpi" />
     <splash src="portrait-xxhdpi.png" platform="android" qualifier="port-xxhdpi" />
     <splash src="landscape-xxhdpi.png" platform="android" qualifier="land-xxhdpi" />-->
